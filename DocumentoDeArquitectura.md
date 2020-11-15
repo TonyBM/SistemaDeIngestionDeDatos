@@ -201,7 +201,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
     }
 ```
   * Respuesta (200OK):
-  ```json
+```json
     {
       "1": {
         "costo" : 1000000.00,
