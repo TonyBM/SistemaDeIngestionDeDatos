@@ -40,43 +40,45 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 * Descripción:
   * Se utiliza para obtener el listado de propiedades registradas en el sistema
   junto con su información correspondiente.
-* Respuesta:    
-      {
-        "1": {
-          "costo" : 1000000.00,
-          "ubicacion" : Oriente,
-          "direccion" : {
-            "idDireccion" : 1
-            "calle" : "48"
-            "numero" : "478"
-            "cruzamientos" : "53 y 56"
-            "colonia" : "México Oriente"
-            }
-          "metros" : 56,
-          "banos" : 2.5,
-          "habitaciones" : 3,
-          "fechaPublicacion" : "2009-03-02 23:13:36",
-          "fechaCreacion" : "2009-03-02 23:13:36",
-          "idusuario" : 3
-        },
-        "2": {
-          "costo" : 3500140.00,
-          "ubicacion" : Norte,
-          "direccion" : {
-            "idDireccion" : 2
-            "calle" : "48"
-            "numero" : "478"
-            "cruzamientos" : "53 y 56"
-            "colonia" : "Francisco de Montejo"
-            }
-          "metros" : 100,
-          "banos" : 4,
-          "habitaciones" : 4,
-          "fechaPublicacion" : "2009-03-02 23:13:36",
-          "fechaCreacion" : "2009-03-02 23:13:36",
-          "idusuario" : 3
-        }
-      }         
+* Respuesta:
+```json    
+  {
+    "1": {
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "idDireccion" : 1,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    },
+    "2": {
+      "costo" : 3500140.00,
+      "ubicacion" : "Norte",
+      "direccion" : {
+        "idDireccion" : 2,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "Francisco de Montejo"
+      },
+      "metros" : 100,
+      "banos" : 4,
+      "habitaciones" : 4,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    }
+  }         
+```
 
 #### <a name="listarEspecifica"></a> Listar propiedad especifica
 * URI :
@@ -85,46 +87,50 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
   * Se utiliza para obtener la información de una propiedad especifica registrada
   en el sistema.
 * Respuesta:    
-      {
-        "1": {
-          "costo" : 1000000.00,
-          "ubicacion" : Oriente,
-          "direccion" : {
-            "idDireccion" : 1
-            "calle" : "48"
-            "numero" : "478"
-            "cruzamientos" : "53 y 56"
-            "colonia" : "México Oriente"
-            }
-          "metros" : 56,
-          "banos" : 2.5,
-          "habitaciones" : 3,
-          "fechaPublicacion" : "2009-03-02 23:13:36",
-          "fechaCreacion" : "2009-03-02 23:13:36",
-          "idusuario" : 3
-        }
-      }       
+```json    
+  {
+    "1": {
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "idDireccion" : 1,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    }
+  }
+```       
 * Ejemplo de request: `GET /api/propiedades/1`
   * Respuesta:
-        {
-          "1": {
-            "costo" : 1000000.00,
-            "ubicacion" : Oriente,
-            "direccion" : {
-              "idDireccion" : 1
-              "calle" : "48"
-              "numero" : "478"
-              "cruzamientos" : "53 y 56"
-              "colonia" : "México Oriente"
-              }
-            "metros" : 56,
-            "banos" : 2.5,
-            "habitaciones" : 3,
-            "fechaPublicacion" : "2009-03-02 23:13:36",
-            "fechaCreacion" : "2009-03-02 23:13:36",
-            "idusuario" : 3
-          }
-        }     
+```json
+    {
+      "1": {
+        "costo" : 1000000.00,
+        "ubicacion" : "Oriente",
+        "direccion" : {
+          "idDireccion" : 1,
+          "calle" : "48",
+          "numero" : "478",
+          "cruzamientos" : "53 y 56",
+          "colonia" : "México Oriente"
+        },
+        "metros" : 56,
+        "banos" : 2.5,
+        "habitaciones" : 3,
+        "fechaPublicacion" : "2009-03-02 23:13:36",
+        "fechaCreacion" : "2009-03-02 23:13:36",
+        "idusuario" : 3
+      }
+    }     
+```    
 
 #### <a name="crearPropiedad"></a> Crear propiedades
 * URI :
@@ -132,82 +138,90 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 * Descripción:
   * Se utiliza para realizar el registro de una propiedad dentro del sistema.
 * Campos requeridos:
-      {
-        "usuario" : String
-        "password" : String
-        "costo" : Float con dos puntos decimales,
-        "ubicacion" : String,
-        "direccion" : {
-          "calle" : String
-          "numero" : String
-          "cruzamientos" : String
-          "colonia" : String
-          }
-        "metros" : Integer,
-        "banos" : float,
-        "habitaciones" : Integer,
-        "fechaPublicacion" : String (Y-m-d H:i:s),
-        "fechaCreacion" : String (Y-m-d H:i:s),
-      }
+```json
+  {
+    "usuario" : String,
+    "password" : String,
+    "costo" : Float con dos puntos decimales,
+    "ubicacion" : String,
+    "direccion" : {
+      "calle" : String,
+      "numero" : String,
+      "cruzamientos" : String,
+      "colonia" : String
+    },
+    "metros" : Integer,
+    "banos" : float,
+    "habitaciones" : Integer,
+    "fechaPublicacion" : String (Y-m-d H:i:s),
+    "fechaCreacion" : String (Y-m-d H:i:s),
+  }
+```
 * Respuesta:    
-      {
-        "3": {
-          "costo" : 1000000.00,
-          "ubicacion" : Oriente,
-          "direccion" : {
-            "idDireccion" : 5
-            "calle" : "48"
-            "numero" : "478"
-            "cruzamientos" : "53 y 56"
-            "colonia" : "México Oriente"
-            }
-          "metros" : 56,
-          "banos" : 2.5,
-          "habitaciones" : 3,
-          "fechaPublicacion" : "2009-03-02 23:13:36",
-          "fechaCreacion" : "2009-03-02 23:13:36",
-          "idusuario" : 3
-        }
-      }       
+```json
+  {
+    "3": {
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "idDireccion" : 5,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    }
+  }     
+```  
 * Ejemplo de request: `POST /api/propiedades`
   * Request:
-        {
-          "usuario" : "a16016263@alumnos.uady.mx"
-          "password" : "123123"
-          "costo" : 1000000.00,
-          "ubicacion" : Oriente,
-          "direccion" : {
-            "calle" : "48"
-            "numero" : "478"
-            "cruzamientos" : "53 y 56"
-            "colonia" : "México Oriente"
-          }
-          "metros" : 56,
-          "banos" : 2.5,
-          "habitaciones" : 3,
-          "fechaPublicacion" : "2009-03-02 23:13:36",
-          "fechaCreacion" : "2009-03-02 23:13:36"
-        }
+```json
+    {
+      "usuario" : "a16016263@alumnos.uady.mx",
+      "password" : "123123",
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36"
+    }
+```
   * Respuesta:
-        {
-          "1": {
-            "costo" : 1000000.00,
-            "ubicacion" : Oriente,
-            "direccion" : {
-              "idDireccion" : 4
-              "calle" : "48"
-              "numero" : "478"
-              "cruzamientos" : "53 y 56"
-              "colonia" : "México Oriente"
-            }
-            "metros" : 56,
-            "banos" : 2.5,
-            "habitaciones" : 3,
-            "fechaPublicacion" : "2009-03-02 23:13:36",
-            "fechaCreacion" : "2009-03-02 23:13:36",
-            "idusuario" : 3
-          }
-        }     
+  ```json
+    {
+      "1": {
+        "costo" : 1000000.00,
+        "ubicacion" : "Oriente",
+        "direccion" : {
+          "idDireccion" : 4,
+          "calle" : "48",
+          "numero" : "478",
+          "cruzamientos" : "53 y 56",
+          "colonia" : "México Oriente"
+        },
+        "metros" : 56,
+        "banos" : 2.5,
+        "habitaciones" : 3,
+        "fechaPublicacion" : "2009-03-02 23:13:36",
+        "fechaCreacion" : "2009-03-02 23:13:36",
+        "idusuario" : 3
+      }
+    }     
+```
 
 #### <a name="crearCSV"></a> Crear propiedades desde CSV
 
