@@ -139,12 +139,12 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 * Descripción:
   * Se utiliza para solicitar una busqueda con la capacidad de paginar las listarPropiedades
   en conjunto con la información de estas registradas en el sistema.
-* Ejemplo de request: `GET /api/propiedades/1/10`
-  * Descripción: La respuesta son un total de 10 propiedades comenzando desde la propiedad con el id 1
+* Ejemplo de request: `GET /api/propiedades/5/20`
+  * Descripción: La respuesta son un total de 20 propiedades comenzando desde la propiedad con el id 5, por lo que se devolverá el listado de las propiedades de la 5 a la 25.
   * Respuesta (200OK):
 ```json    
     {
-      "1": {
+      "5": {
         "costo" : 1000000.00,
         "ubicacion" : "Oriente",
         "direccion" : {
@@ -164,7 +164,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 
       ...      
 
-      "10": {
+      "25": {
         "costo" : 3500140.00,
         "ubicacion" : "Norte",
         "direccion" : {
