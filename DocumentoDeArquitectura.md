@@ -28,6 +28,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 ## Documentación de la API
 ### Endpoints
 * [Listar propiedades](#listarPropiedades) : `GET /api/propiedades/`
+* [Listar propiedades paginadas](#listarPaginadas) : `GET /api/propiedades/{offsetValue}/{cantidad}`
 * [Listar propiedad especifica](#listarEspecifica) : `GET /api/propiedades/{id}`
 * [Crear propiedad](#crearPropiedad) : `POST /api/propiedades/`
 * [Crear propiedades desde csv](#crearCSV) : `POST /api/propiedades/`
@@ -131,6 +132,57 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
       }
     }     
 ```    
+
+#### <a name="listarPaginadas"></a> Listar propiedades paginadas
+* URI :
+  * `GET /api/propiedades/{offsetValue}/{cantidad}`
+* Descripción:
+  * Se utiliza para solicitar una busqueda con la capacidad de paginar las listarPropiedades
+  en conjunto con la información de estas registradas en el sistema.
+* Ejemplo de request: `GET /api/propiedades/1/10`
+  * Descripción: La respuesta son un total de 10 propiedades comenzando desde la propiedad con el id 1
+  * Respuesta (200OK):
+```json    
+    {
+      "1": {
+        "costo" : 1000000.00,
+        "ubicacion" : "Oriente",
+        "direccion" : {
+          "idDireccion" : 1,
+          "calle" : "48",
+          "numero" : "478",
+          "cruzamientos" : "53 y 56",
+          "colonia" : "México Oriente"
+        },
+        "metros" : 56,
+        "banos" : 2.5,
+        "habitaciones" : 3,
+        "fechaPublicacion" : "2009-03-02 23:13:36",
+        "fechaCreacion" : "2009-03-02 23:13:36",
+        "idusuario" : 3
+      },
+
+      ...      
+
+      "10": {
+        "costo" : 3500140.00,
+        "ubicacion" : "Norte",
+        "direccion" : {
+          "idDireccion" : 2,
+          "calle" : "48",
+          "numero" : "478",
+          "cruzamientos" : "53 y 56",
+          "colonia" : "Francisco de Montejo"
+        },
+        "metros" : 100,
+        "banos" : 4,
+        "habitaciones" : 4,
+        "fechaPublicacion" : "2009-03-02 23:13:36",
+        "fechaCreacion" : "2009-03-02 23:13:36",
+        "idusuario" : 3
+      }
+    }         
+```  
 
 #### <a name="crearPropiedad"></a> Crear propiedades
 * URI :
