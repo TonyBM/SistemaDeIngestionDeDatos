@@ -40,7 +40,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 * Descripción:
   * Se utiliza para obtener el listado de propiedades registradas en el sistema
   junto con su información correspondiente.
-* Respuesta:
+* Respuesta (200OK):
 ```json    
   {
     "1": {
@@ -86,7 +86,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 * Descripción:
   * Se utiliza para obtener la información de una propiedad especifica registrada
   en el sistema.
-* Respuesta:    
+* Respuesta (200OK):    
 ```json    
   {
     "1": {
@@ -109,7 +109,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
   }
 ```       
 * Ejemplo de request: `GET /api/propiedades/1`
-  * Respuesta:
+  * Respuesta (200OK):
 ```json
     {
       "1": {
@@ -157,7 +157,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
     "fechaCreacion" : String (Y-m-d H:i:s),
   }
 ```
-* Respuesta:    
+* Respuesta (200OK):    
 ```json
   {
     "3": {
@@ -200,7 +200,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
       "fechaCreacion" : "2009-03-02 23:13:36"
     }
 ```
-  * Respuesta:
+  * Respuesta (200OK):
   ```json
     {
       "1": {
