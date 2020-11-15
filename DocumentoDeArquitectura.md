@@ -138,7 +138,7 @@ Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños
 * Descripción:
   * Se utiliza para realizar el registro de una propiedad dentro del sistema.
 * Campos requeridos:
-```json
+```
   {
     "usuario" : String,
     "password" : String,
