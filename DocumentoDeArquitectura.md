@@ -8,8 +8,17 @@ La arquitectura por capas es una de las formas más simples de los patrones arqu
 Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños servicios, cada uno corriendo sus propios procesos y comunicando con mecanismos ligeros. Cada microservicio debe ser despeglable y escalable de manera independiente y cada servicio tiene limites definidos permitiendo que los diferentes servicios sean escritos en diferentes lenguajes de programación.
 
 ### Diagrama de arquitectura con descripción
-![alt text](diagramaArquitectura.png "Title")
+![alt text](diagramaArquitectura.jpg "Title")
+En este diagrama se pueden observar los componentes principales del sistema. El componente llamado "App" representa la api a traves de la  cual se ingresará la información de las propiedades. La "App" luego almacena la información en la base de datos. Al almacenarse información en la base de datos la información es tomada por la "App de ML" que usa un algoritmo de regresión lineal para poder predecir valores de hogares por zonas. Los resultados de este algoritmo es luego almacenado en la base de datos
 ### Diagrama de secuencia
+![alt text](buscarFiltrado.jpg "Title")
+![alt text](createCasa.jpg "Title")
+![alt text](cargaMasiva.jpg "Title")
+![alt text](deleteCasa.jpg "Title")
+![alt text](getCasa.jpg "Title")
+![alt text](getCasas.jpg "Title")
+![alt text](app2.jpg "Title")
+
 ### Diagrama Entidad Relación
 ### Descripción Entidades
 
