@@ -14,7 +14,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 ![alt text](buscarFiltrado.jpg "Title")
 ![alt text](createCasa.jpg "Title")
 ![alt text](cargaMasiva.jpg "Title")
-![alt text](deleteCasa.jpg "Title")
+![alt text](deleteCasa.png "Title")
 ![alt text](getCasa.jpg "Title")
 ![alt text](getCasas.jpg "Title")
 ![alt text](app2.jpg "Title")
