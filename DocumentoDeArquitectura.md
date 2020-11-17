@@ -28,7 +28,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 * [Listar propiedades paginadas](#listarPaginadas) : `GET /api/propiedades/{offsetValue}/{cantidad}`
 * [Listar propiedad especifica](#listarEspecifica) : `GET /api/propiedades/{id}`
 * [Crear propiedad](#crearPropiedad) : `POST /api/propiedades/`
-* [Crear propiedades desde csv](#crearCSV) : `POST /api/propiedades/`
+* [Crear propiedades desde csv](#crearCSV) : `POST /api/propiedades/csv`
 * [Actualizar propiedad](#actualizarPropiedad) : `PUT /api/propiedades/{id}`
 * [Eliminar propiedad](#eliminarPropiedad) : `DELETE /api/propiedades/{id}`
 
@@ -273,10 +273,227 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 ```
 
 #### <a name="crearCSV"></a> Crear propiedades desde CSV
+* URI :
+  * `POST /api/propiedades/csv`
+* Descripción:
+  * Se utiliza para realizar el registro de propiedades dentro del sistema por medio de un archivo csv.
+* Campos requeridos en cada entrada del csv:
+```
+    "usuario" : String,
+    "password" : String,
+    "costo" : Float con dos puntos decimales,
+    "ubicacion" : String,
+    "calle" : String,
+    "numero" : String,
+    "cruzamientos" : String,
+    "colonia" : String,
+    "metros" : Integer,
+    "banos" : float,
+    "habitaciones" : Integer,
+    "fechaPublicacion" : String (Y-m-d H:i:s),
+    "fechaCreacion" : String (Y-m-d H:i:s),
+```
+* Respuesta (200OK):    
+```json
+  {
+    "3": {
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "idDireccion" : 5,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    },
+    "4": {
+      "costo" : 1050000.00,
+      "ubicacion" : "Poniente",
+      "direccion" : {
+        "idDireccion" : 5,
+        "calle" : "58",
+        "numero" : "121",
+        "cruzamientos" : "63 y 66",
+        "colonia" : "México Poniente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    },
+    ...
+  }     
+```  
+* Ejemplo de request: `POST /api/propiedades/csv`
+  * Request:
+```
+    POST /api/propiedades/csv HTTP/1.1
+    Host: localhost:8080
+    User-Agent: insomnia/2020.4.2
+    Content-Type: text/csv
+    Accept: */*
+    Content-Length: 1303
+```
+  * Respuesta (200OK):
+```json
+    {
+      "1": {
+        "costo" : 1000000.00,
+        "ubicacion" : "Oriente",
+        "direccion" : {
+          "idDireccion" : 4,
+          "calle" : "48",
+          "numero" : "478",
+          "cruzamientos" : "53 y 56",
+          "colonia" : "México Oriente"
+        },
+        "metros" : 56,
+        "banos" : 2.5,
+        "habitaciones" : 3,
+        "fechaPublicacion" : "2009-03-02 23:13:36",
+        "fechaCreacion" : "2009-03-02 23:13:36",
+        "idusuario" : 3
+      },
+      "2": {
+        "costo" : 1050000.00,
+        "ubicacion" : "Poniente",
+        "direccion" : {
+          "idDireccion" : 5,
+          "calle" : "58",
+          "numero" : "121",
+          "cruzamientos" : "63 y 66",
+          "colonia" : "México Poniente"
+        },
+        "metros" : 56,
+        "banos" : 2.5,
+        "habitaciones" : 3,
+        "fechaPublicacion" : "2009-03-02 23:13:36",
+        "fechaCreacion" : "2009-03-02 23:13:36",
+        "idusuario" : 3
+      }
+    }
+```
 
 #### <a name="actualizarPropiedad"></a> Actualizar propiedad
+* URI :
+  * `PUT /api/propiedades/{id}`
+* Descripción:
+  * Se utiliza para modificar la información de una propiedad especifica registrada
+  en el sistema.
+* Campos requeridos:
+```
+  {
+    "usuario" : String,
+    "password" : String,
+    "costo" : Float con dos puntos decimales,
+    "ubicacion" : String,
+    "direccion" : {
+      "calle" : String,
+      "numero" : String,
+      "cruzamientos" : String,
+      "colonia" : String
+    },
+    "metros" : Integer,
+    "banos" : float,
+    "habitaciones" : Integer,
+    "fechaPublicacion" : String (Y-m-d H:i:s),
+    "fechaCreacion" : String (Y-m-d H:i:s),
+  }
+```
+* Respuesta (200OK):    
+```json    
+  {
+    "1": {
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "idDireccion" : 1,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    }
+  }
+```       
+* Ejemplo de request: `PUT /api/propiedades/1`
+  * Request:
+```json
+    {
+      "usuario" : "a16016263@alumnos.uady.mx",
+      "password" : "123123",
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36"
+    }
+```
+  * Respuesta (200OK):
+```json
+    {
+      "1": {
+        "costo" : 1000000.00,
+        "ubicacion" : "Oriente",
+        "direccion" : {
+          "idDireccion" : 1,
+          "calle" : "48",
+          "numero" : "478",
+          "cruzamientos" : "53 y 56",
+          "colonia" : "México Oriente"
+        },
+        "metros" : 56,
+        "banos" : 2.5,
+        "habitaciones" : 3,
+        "fechaPublicacion" : "2009-03-02 23:13:36",
+        "fechaCreacion" : "2009-03-02 23:13:36",
+        "idusuario" : 3
+      }
+    }     
+``` 
 
 #### <a name="eliminarPropiedad"></a> Eliminar propiedad
+* URI :
+  * `DELETE /api/propiedades/{id}`
+* Descripción:
+  * Se utiliza para eliminar la información de una propiedad especifica registrada
+  en el sistema.
+* Respuesta (200OK):    
+```json    
+  {
+    "respuesta": "La propiedad {id} ha sido eliminada"
+  }
+```       
+* Ejemplo de request: `DELETE /api/propiedades/1`
+  * Respuesta (200OK):
+```json    
+  {
+    "respuesta": "La propiedad 1 ha sido eliminada"
+  }
+```  
 
 
 ## Criterios de calidad la API
