@@ -38,7 +38,19 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 
 ### Diagrama Entidad Relación
 ![alt text](ER.png "Diagrama Entidad Relación")
-### Descripción Entidades
+### Descripción de las Entidades
+#### Usuarios
+Representa a las personas del mundo real que pueden agregar y eliminar propiedades de la base de datos por medio del sistema. Esta tabla mantendrá un registro de cada usuario con esos permisos y serán introducidos manualmente. Tiene una relación de uno a muchos con la entidad *Propiedades* ya que un usuario puede crear cero o más propiedades, se relacionará mediante su llave primaria "idUsuario".
+#### Direcciones
+Dentro de esta entidad se encontrarán los datos de la dirección exacta de la propiedad. Tiene una relación de uno a uno con la entidad *Propiedades* ya que cada dirección es única y propia de la propiedad, estas entidades se relacionarán mediante la llave primaria "idDireccion".
+#### Propiedades
+Contiene todos los datos de las casas en venta registradas en el sistema. Esta tabla es la principal del sistema ya que sus registros serán directamente consultados con los métodos GET. Está relacionada con la entidad *Direcciones* mediante la llave foránea "idDireccion", y con la entidad *Usuarios* mediante la llave foránea "idUsuario". Los registros de esta tabla serán introducidos a través del sistema utilizando los métodos POST. A continuación se describirán algunos de sus atributos.
+##### Atributos:
+* "Banos": Cantidad de baños en la propiedad.
+* "Metros": Área del terreno en el que está ubicada la propiedad.
+* "FechaPublicación": Fecha en la que la propiedad se encontrará disponible a venta o renta.
+* "FechaCreacion": Fecha en la que se generó el registro de la propiedad en la base de datos.
+* "Ubicacion": Zona de la ciudad en la que se ubica el terreno de la propiedad (oriente, poniente, norte o sur).
 
 <a name="api"></a>
 ## Documentación de la API
