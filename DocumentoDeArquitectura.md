@@ -71,13 +71,13 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
   * offset : Integer - Indice donde comenzará el listado de propiedades
   * costoMenor : float - Cantidad para buscar propiedades con costo menor que el indicado en este parametro
   * costoMayor : float - Cantidad para buscar propiedades con costo mayor que el indicado en este parametro
-  * ubicacion : String (Norte, Sur, Este, Oeste, Centro) - Valor para buscar por ubicacion de la propiedad
-  * colonia : String - Valor de busqueda por colonia
-  * metrosMenor : float - Cantidad para buscar propiedades con metros cuadrados menor que el indicado en este parametro
-  * metrosMayor : float - Cantidad para buscar propiedades con metros cuadrados mayor que el indicado en este parametro
+  * ubicacion : String (Norte, Sur, Este, Oeste, Centro) - Valor para buscar por ubicación de la propiedad
+  * colonia : String - Valor de búsqueda por colonia
+  * metrosMenor : float - Cantidad para buscar propiedades con metros cuadrados menor que el indicado en este parámetro
+  * metrosMayor : float - Cantidad para buscar propiedades con metros cuadrados mayor que el indicado en este parámetro
   * banos : integer - Cantidad de baños deseados en la propiedad
   * habitaciones : integer - Cantidad de habitaciones deseadas en la propiedad
-  * fechaPublicacion : String (Y-m-d H:i:s) - Fecha de publicacion de la propiedad
+  * fechaPublicacion : String (Y-m-d H:i:s) - Fecha de publicación de la propiedad
 * Ejemplo de solicitud:
   * `GET /api/propiedades?cantidad=1&metros=56`
 * Respuesta (200OK):
@@ -176,7 +176,7 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 * URI :
   * `GET /api/propiedades/{offsetValue}/{cantidad}`
 * Descripción:
-  * Se utiliza para solicitar una busqueda con la capacidad de paginar las listarPropiedades
+  * Se utiliza para solicitar una búsqueda con la capacidad de paginar las listarPropiedades
   en conjunto con la información de estas registradas en el sistema.
 * Ejemplo de request: `GET /api/propiedades/5/20`
   * Descripción: La respuesta son un total de 20 propiedades comenzando desde la propiedad con el id 5, por lo que se devolverá el listado de las propiedades de la 5 a la 25.
