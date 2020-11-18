@@ -8,7 +8,7 @@
 ## Introducción
 
 ### Propósito
-Describir la arquitectura que será utilizada para el desarrollo del proyecto "Home Run Software" a traves de la conceptualización de cada uno de sus componentes. 
+Describir la arquitectura que será utilizada para el desarrollo del proyecto "Home Run Software" a traves de la conceptualización de cada uno de sus componentes.
 ### Alcance
 El presente documento será de utilidad para los desarrolladores de "Home Run Software". Se espera que al revisarlo se entiendan todas las componentes del proyecto, asi cómo la relación que existe entre ellas. Para ello, será necesario describir rigurosamente todos los procesos y entidades del sistema a través de diagramas UML. Teniendo claro el diseño del software, se podrá continuar con la fase de construcción del software.
 ### Documentos de referencia
@@ -34,6 +34,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 ![alt text](app2.jpg "Title")
 
 ### Diagrama Entidad Relación
+![alt text](ER.png "Diagrama Entidad Relación")
 ### Descripción Entidades
 
 <a name="api"></a>
@@ -488,7 +489,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
         "idusuario" : 3
       }
     }     
-``` 
+```
 
 #### <a name="eliminarPropiedad"></a> Eliminar propiedad
 * URI :
