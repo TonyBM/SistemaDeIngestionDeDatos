@@ -8,9 +8,9 @@
 ## Introducción
 
 ### Propósito
-Describir la arquitectura que será utilizada para el desarrollo del proyecto "Home Run Software" a traves de la conceptualización de cada uno de sus componentes.
+Describir la arquitectura que será utilizada para el desarrollo del proyecto "Home Run Software" a través de la conceptualización de cada uno de sus componentes.
 ### Alcance
-El presente documento será de utilidad para los desarrolladores de "Home Run Software". Se espera que al revisarlo se entiendan todas las componentes del proyecto, asi cómo la relación que existe entre ellas. Para ello, será necesario describir rigurosamente todos los procesos y entidades del sistema a través de diagramas UML. Teniendo claro el diseño del software, se podrá continuar con la fase de construcción del software.
+El presente documento será de utilidad para los desarrolladores de "Home Run Software". Se espera que al revisarlo se entiendan todas las componentes del proyecto, así como la relación que existe entre ellas. Para ello, será necesario describir rigurosamente todos los procesos y entidades del sistema a través de diagramas UML. Teniendo claro el diseño del software, se podrá continuar con la fase de construcción del software.
 ### Documentos de referencia
 Plantilla de la IEEE para el desarrollo de documentos de arquitectura de software: 
 https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj__8njzIztAhUFWN8KHQWPA50QFjAAegQIBRAC&url=http%3A%2F%2Fwww.iso-architecture.org%2Fieee-1471%2Ftemplates%2F42010-vp-template.doc&usg=AOvVaw2FPIjkVX0mIpPNCDqKFi9V
@@ -20,7 +20,7 @@ https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj__8nj
 ## Arquitectura
 
 ### Descripción de la Arquitectura utilizada
-La arquitectura por capas es una de las formas más simples de los patrones arquitectonicos de software. En esta arquitectura los componentes son organizados en capas horizontales. Estas capas son independientes y se comunican unicamente con las capas adjacentes. Una arquitectura por capas general puede constar de n-capas sin embargo la implementación más comun consta de 4 capas que son: Capa de Presentación,Capa de Logica de negocio (Bussiness Layer), Capa de Persistencia y Capa de Almacenamiento. Las ventajas de usar esta arquitectura es que es sencilla de implementar y probar. Las desventajas es que la aplicación se vuelve dificil de modificar y escalar.
+La arquitectura por capas es una de las formas más simples de los patrones arquitectónicos de software. En esta arquitectura los componentes son organizados en capas horizontales. Estas capas son independientes y se comunican únicamente con las capas adyacentes. Una arquitectura por capas general puede constar de n-capas sin embargo la implementación más común consta de 4 capas que son: Capa de Presentación, Capa de Lógica de negocio (Bussiness Layer), Capa de Persistencia y Capa de Almacenamiento. Las ventajas de usar esta arquitectura es que es sencilla de implementar y probar. Las desventajas es que la aplicación se vuelve difícil de modificar y escalar.
 ### Definición teórica de Microservicios
 Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños servicios, cada uno corriendo sus propios procesos y comunicando con mecanismos ligeros. Cada microservicio debe ser despeglable y escalable de manera independiente y cada servicio tiene limites definidos permitiendo que los diferentes servicios sean escritos en diferentes lenguajes de programación.
 
