@@ -1,5 +1,19 @@
 # # Home Run Software
 ## Indice
+1. [ Introducción ] (#intro)
+2. [ Arquitectura ] (#arqui)
+3. [ Documentación de la API ] (#api)
+4. [ Criterios de calidad ] (#calidad)
+<a name="intro"></a>
+## Introducción
+
+### Propósito
+Describir la arquitectura que será utilizada para el desarrollo del proyecto "Home Run Software" a traves de la conceptualización de cada uno de sus componentes. 
+### Alcance
+El presente documento será de utilidad para los desarrolladores de "Home Run Software". Se espera que al revisarlo se entiendan todas las componentes del proyecto, asi cómo la relación que existe entre ellas. Para ello, será necesario describir rigurosamente todos los procesos y entidades del sistema a través de diagramas UML. Teniendo claro el diseño del software, se podrá continuar con la fase de construcción del software.
+### Documentos de referencia
+
+<a name="arqui"></a>
 ## Arquitectura
 
 ### Descripción de la Arquitectura utilizada
@@ -22,6 +36,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 ### Diagrama Entidad Relación
 ### Descripción Entidades
 
+<a name="api"></a>
 ## Documentación de la API
 ### Endpoints
 * [Listar propiedades](#listarPropiedades) : `GET /api/propiedades/`
@@ -495,7 +510,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
   }
 ```  
 
-
+<a name="calidad"></a>
 ## Criterios de calidad la API
 Criterios de calidad clasificados por su enfoque de calidad
 
