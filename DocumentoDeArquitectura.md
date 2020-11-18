@@ -12,10 +12,8 @@ Describir la arquitectura que será utilizada para el desarrollo del proyecto "H
 ### Alcance
 El presente documento será de utilidad para los desarrolladores de "Home Run Software". Se espera que al revisarlo se entiendan todas las componentes del proyecto, así como la relación que existe entre ellas. Para ello, será necesario describir rigurosamente todos los procesos y entidades del sistema a través de diagramas UML. Teniendo claro el diseño del software, se podrá continuar con la fase de construcción del software.
 ### Documentos de referencia
-Plantilla de la IEEE para el desarrollo de documentos de arquitectura de software: 
-https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj__8njzIztAhUFWN8KHQWPA50QFjAAegQIBRAC&url=http%3A%2F%2Fwww.iso-architecture.org%2Fieee-1471%2Ftemplates%2F42010-vp-template.doc&usg=AOvVaw2FPIjkVX0mIpPNCDqKFi9V
-<br/>Ejemplo de un documento de arquitectura desarrollado bajo los estandares de la IEEE: 
-https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj__8njzIztAhUFWN8KHQWPA50QFjABegQIARAC&url=https%3A%2F%2Fwww.rose-hulman.edu%2Fclass%2Fcsse%2Fcsse477%2Fhandouts_377%2FSoftArchDocTemplate.doc&usg=AOvVaw0Wp5NHYKive-XjYv83jWzQ
+[Plantilla de la IEEE para el desarrollo de documentos de arquitectura de software](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj__8njzIztAhUFWN8KHQWPA50QFjAAegQIBRAC&url=http%3A%2F%2Fwww.iso-architecture.org%2Fieee-1471%2Ftemplates%2F42010-vp-template.doc&usg=AOvVaw2FPIjkVX0mIpPNCDqKFi9V)
+<br/>[Ejemplo de un documento de arquitectura desarrollado bajo los estandares de la IEEE](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj__8njzIztAhUFWN8KHQWPA50QFjABegQIARAC&url=https%3A%2F%2Fwww.rose-hulman.edu%2Fclass%2Fcsse%2Fcsse477%2Fhandouts_377%2FSoftArchDocTemplate.doc&usg=AOvVaw0Wp5NHYKive-XjYv83jWzQ)
 <a name="arqui"></a>
 ## Arquitectura
 
