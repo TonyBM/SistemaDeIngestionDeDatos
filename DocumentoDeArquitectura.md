@@ -20,11 +20,11 @@ El presente documento será de utilidad para los desarrolladores de "Home Run So
 ### Descripción de la Arquitectura utilizada
 La arquitectura por capas es una de las formas más simples de los patrones arquitectónicos de software. En esta arquitectura los componentes son organizados en capas horizontales. Estas capas son independientes y se comunican únicamente con las capas adyacentes. Una arquitectura por capas general puede constar de n-capas sin embargo la implementación más común consta de 4 capas que son: Capa de Presentación, Capa de Lógica de negocio (Bussiness Layer), Capa de Persistencia y Capa de Almacenamiento. Las ventajas de usar esta arquitectura es que es sencilla de implementar y probar. Las desventajas es que la aplicación se vuelve difícil de modificar y escalar.
 ### Definición teórica de Microservicios
-Es un acercamineto para desarrollar una aplicacion como un conjunto de pequeños servicios, cada uno corriendo sus propios procesos y comunicando con mecanismos ligeros. Cada microservicio debe ser despeglable y escalable de manera independiente y cada servicio tiene limites definidos permitiendo que los diferentes servicios sean escritos en diferentes lenguajes de programación.
+Es un acercamiento para desarrollar una aplicación como un conjunto de pequeños servicios, cada uno corriendo sus propios procesos y comunicando con mecanismos ligeros. Cada microservicio debe ser desplegable y escalable de manera independiente y cada servicio tiene límites definidos permitiendo que los diferentes servicios sean escritos en diferentes lenguajes de programación.
 
 ### Diagrama de arquitectura con descripción
 ![alt text](diagramaArquitectura.jpg "Title")
-En este diagrama se pueden observar los componentes principales del sistema. El componente llamado "App" representa la api a traves de la  cual se ingresará la información de las propiedades. La "App" luego almacena la información en la base de datos. Al almacenarse información en la base de datos la información es tomada por la "App de ML" que usa un algoritmo de regresión lineal para poder predecir valores de hogares por zonas. Los resultados de este algoritmo es luego almacenado en la base de datos
+En este diagrama se pueden observar los componentes principales del sistema. El componente llamado "App" representa la API a través de la  cual se ingresará la información de las propiedades. La "App" luego almacena la información en la base de datos. Al almacenarse información en la base de datos la información es tomada por la "App de ML" que usa un algoritmo de regresión lineal para poder predecir valores de hogares por zonas. Los resultados de este algoritmo es luego almacenado en la base de datos.
 ### Diagrama de secuencia
 ![alt text](buscarFiltrado.jpg "Title")
 ![alt text](createCasa.jpg "Title")
@@ -43,12 +43,12 @@ Representa a las personas del mundo real que pueden agregar y eliminar propiedad
 Dentro de esta entidad se encontrarán los datos de la dirección exacta de la propiedad. Tiene una relación de uno a uno con la entidad *Propiedades* ya que cada dirección es única y propia de la propiedad, estas entidades se relacionarán mediante la llave primaria "idDireccion".
 #### Propiedades
 Contiene todos los datos de las casas en venta registradas en el sistema. Esta tabla es la principal del sistema ya que sus registros serán directamente consultados con los métodos GET. Está relacionada con la entidad *Direcciones* mediante la llave foránea "idDireccion", y con la entidad *Usuarios* mediante la llave foránea "idUsuario". Los registros de esta tabla serán introducidos a través del sistema utilizando los métodos POST. A continuación se describirán algunos de sus atributos.
-##### Atributos:
-* "Banos": Cantidad de baños en la propiedad.
-* "Metros": Área del terreno en el que está ubicada la propiedad.
-* "FechaPublicación": Fecha en la que la propiedad se encontrará disponible a venta o renta.
-* "FechaCreacion": Fecha en la que se generó el registro de la propiedad en la base de datos.
-* "Ubicacion": Zona de la ciudad en la que se ubica el terreno de la propiedad (oriente, poniente, norte o sur).
+* **Atributos**:
+  * "Banos": Cantidad de baños en la propiedad.
+  * "Metros": Área del terreno en el que está ubicada la propiedad.
+  * "FechaPublicación": Fecha en la que la propiedad se encontrará disponible a venta o renta.
+  * "FechaCreacion": Fecha en la que se generó el registro de la propiedad en la base de datos.
+  * "Ubicacion": Zona de la ciudad en la que se ubica el terreno de la propiedad (oriente, poniente, norte o sur).
 
 <a name="api"></a>
 ## Documentación de la API
