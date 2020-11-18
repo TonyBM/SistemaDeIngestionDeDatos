@@ -49,7 +49,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 
 #### <a name="listarPropiedades"></a> Listar propiedades
 * URI :
-  * `GET /api/propiedades/`
+  * `GET /api/propiedades?{parametros_opcionales}`
 * Descripción:
   * Se utiliza para obtener el listado de las propiedades registradas en el sistema
   junto con su información correspondiente.
@@ -65,6 +65,8 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
   * banos : integer - Cantidad de baños deseados en la propiedad
   * habitaciones : integer - Cantidad de habitaciones deseadas en la propiedad
   * fechaPublicacion : String (Y-m-d H:i:s) - Fecha de publicacion de la propiedad
+* Ejemplo de solicitud:
+  * `GET /api/propiedades?cantidad=1&metros=56`
 * Respuesta (200OK):
 ```json    
   {
