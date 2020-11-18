@@ -51,7 +51,7 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 * URI :
   * `GET /api/propiedades/`
 * Descripción:
-  * Se utiliza para obtener el listado de propiedades registradas en el sistema
+  * Se utiliza para obtener el listado de las propiedades registradas en el sistema
   junto con su información correspondiente.
 * Respuesta (200OK):
 ```json    
@@ -511,29 +511,29 @@ En este diagrama se pueden observar los componentes principales del sistema. El 
 ```  
 
 <a name="calidad"></a>
-## Criterios de calidad la API
+## Criterios de Calidad de la API
 Criterios de calidad clasificados por su enfoque de calidad
 
 ### Fiabilidad
--Toda funcionalidad del sistema y transacción de negocio va a responder al usuario en menos de 5 segundos.
--Los datos modificados en la base de datos van a ser actualizados en menos de 2 segundos.
+- Toda funcionalidad del sistema y transacción de negocio va a responder al usuario en menos de 5 segundos.
+- Los datos modificados en la base de datos van a ser actualizados en menos de 2 segundos.
 
 ### Eficiencia
--Al momento de realizar un proceso, este no debe de sobrepasar el 20% del uso del CPU.
--La carga en memoria no debe superar a los 20 Kb, 30 Kb.
+- Al momento de realizar un proceso, este no debe de sobrepasar el 20% del uso del CPU.
+- La carga en memoria no debe superar a los 20 Kb, 30 Kb.
 
 ### Seguridad
--El sistema va a estar protegido contra intrusiones externas o usuarios malintencionados.
+- El sistema va a estar protegido contra intrusiones externas o usuarios malintencionados.
 
 ### Usabilidad
--El tiempo de aprendizaje del sistema por un usuario va a ser menor a 2 horas.
--La tasa de errores cometidos por el usuario va a ser menor del 1% de las transacciones  totales ejecutadas en el sistema.
--El sistema va a proporcionar mensajes de error que sean informativos y orientados a usuario final.
+- El tiempo de aprendizaje del sistema por un usuario va a ser menor a 2 horas.
+- La tasa de errores cometidos por el usuario va a ser menor del 1% de las transacciones  totales ejecutadas en el sistema.
+- El sistema va a proporcionar mensajes de error que sean informativos y orientados a usuario final.
 
 ### Dependabilidad
--El tiempo para iniciar o reiniciar el sistema va a ser menor a 2 minutos.
--El promedio de duración de fallas va a ser menor a 2 minutos.
+- El tiempo para iniciar o reiniciar el sistema va a ser menor a 2 minutos.
+- El promedio de duración de fallas va a ser menor a 2 minutos.
 
 ### Compatibilidad/Portabilidad
--Las pruebas de software van a ser gestionadas con una herramienta de gestión de software testing.
--El programa va a estar escrito y preparado de manera comprensible para cualquier desarrollador nuevo que quiera comprender el programa.
+- Las pruebas de software van a ser gestionadas con una herramienta de gestión de software testing.
+- El programa va a estar escrito y preparado de manera comprensible para cualquier desarrollador nuevo que quiera comprender el programa.
