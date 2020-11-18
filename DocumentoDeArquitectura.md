@@ -1,9 +1,9 @@
 # # Home Run Software
 ## Indice
-1. [ Introducción ] (#intro)
-2. [ Arquitectura ] (#arqui)
-3. [ Documentación de la API ] (#api)
-4. [ Criterios de calidad ] (#calidad)
+1. [Introducción](#intro)
+2. [Arquitectura](#arqui)
+3. [Documentación de la API](#api)
+4. [Criterios de Calidad](#calidad)
 <a name="intro"></a>
 ## Introducción
 
