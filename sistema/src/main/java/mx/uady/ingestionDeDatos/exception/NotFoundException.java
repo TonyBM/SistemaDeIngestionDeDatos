@@ -1,4 +1,4 @@
-package mx.uady.sicei.exception;
+package mx.uady.ingestionDeDatos.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

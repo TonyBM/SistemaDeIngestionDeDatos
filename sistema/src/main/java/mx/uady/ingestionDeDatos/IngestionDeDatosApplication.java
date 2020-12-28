@@ -1,13 +1,13 @@
-package mx.uady.sicei;
+package mx.uady.ingestionDeDatos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SiceiApplication {
+public class IngestionDeDatosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SiceiApplication.class, args);
+		SpringApplication.run(IngestionDeDatosApplication.class, args);
 	}
 
 }

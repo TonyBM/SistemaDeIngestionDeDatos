@@ -1,9 +1,9 @@
-package mx.uady.sicei.repository;
+package mx.uady.ingestionDeDatos.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import mx.uady.sicei.model.Usuario;
+import mx.uady.ingestionDeDatos.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {

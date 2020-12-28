@@ -1,4 +1,4 @@
-package mx.uady.sicei.model;
+package mx.uady.ingestionDeDatos.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

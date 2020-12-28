@@ -1,4 +1,4 @@
-package mx.uady.sicei.service;
+package mx.uady.ingestionDeDatos.service;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import mx.uady.sicei.exception.NotFoundException;
+import mx.uady.ingestionDeDatos.exception.NotFoundException;
 
-import mx.uady.sicei.model.Alumno;
-import mx.uady.sicei.model.request.AlumnoRequest;
-import mx.uady.sicei.model.Usuario;
-import mx.uady.sicei.repository.AlumnoRepository;
-import mx.uady.sicei.repository.UsuarioRepository;
+import mx.uady.ingestionDeDatos.model.Alumno;
+import mx.uady.ingestionDeDatos.model.request.AlumnoRequest;
+import mx.uady.ingestionDeDatos.model.Usuario;
+import mx.uady.ingestionDeDatos.repository.AlumnoRepository;
+import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 
 @Service
 public class AlumnoSerivce {

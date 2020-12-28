@@ -1,4 +1,4 @@
-package mx.uady.sicei.config;
+package mx.uady.ingestionDeDatos.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

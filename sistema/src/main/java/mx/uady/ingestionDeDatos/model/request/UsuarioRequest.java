@@ -1,4 +1,4 @@
-package mx.uady.sicei.model.request;
+package mx.uady.ingestionDeDatos.model.request;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -10,11 +10,6 @@ public class UsuarioRequest {
     @Size(min = 5, max = 50)
     @NotEmpty
     private String usuario;
-
-    @NotNull
-    @Size(min = 1, max = 255)
-    @NotEmpty
-    private String nombre;
 
     @NotNull
     @Size(min = 5, max = 50)
@@ -41,14 +36,6 @@ public class UsuarioRequest {
 
     public String getUsuario() {
         return usuario;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     /**

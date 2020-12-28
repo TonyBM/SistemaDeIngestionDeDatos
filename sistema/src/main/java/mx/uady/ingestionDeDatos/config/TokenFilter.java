@@ -1,4 +1,4 @@
-package mx.uady.sicei.config;
+package mx.uady.ingestionDeDatos.config;
 
 import java.io.IOException;
 
@@ -18,8 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
-import mx.uady.sicei.model.Usuario;
-import mx.uady.sicei.repository.UsuarioRepository;
+import mx.uady.ingestionDeDatos.model.Usuario;
+import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 
 @Component
 public class TokenFilter extends GenericFilterBean {

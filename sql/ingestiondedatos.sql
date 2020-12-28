@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2020 a las 04:59:29
--- Versión del servidor: 10.4.16-MariaDB
--- Versión de PHP: 7.4.12
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 28-12-2020 a las 02:03:32
+-- Versión del servidor: 5.7.31
+-- Versión de PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,13 +27,16 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `direcciones`
 --
 
-CREATE TABLE `direcciones` (
-  `id_direccion` int(11) NOT NULL,
+DROP TABLE IF EXISTS `direcciones`;
+CREATE TABLE IF NOT EXISTS `direcciones` (
+  `id_direccion` int(11) NOT NULL AUTO_INCREMENT,
   `calle` varchar(50) NOT NULL,
   `numero` varchar(20) NOT NULL,
   `cruzamientos` varchar(50) NOT NULL,
   `colonia` varchar(50) NOT NULL,
-  `codigo_postal` varchar(6) NOT NULL
+  `codigo_postal` varchar(6) NOT NULL,
+  PRIMARY KEY (`id_direccion`),
+  KEY `colonia` (`colonia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -42,8 +45,9 @@ CREATE TABLE `direcciones` (
 -- Estructura de tabla para la tabla `propiedades`
 --
 
-CREATE TABLE `propiedades` (
-  `id_propiedad` int(11) NOT NULL,
+DROP TABLE IF EXISTS `propiedades`;
+CREATE TABLE IF NOT EXISTS `propiedades` (
+  `id_propiedad` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `precio` double NOT NULL,
   `banos` int(11) NOT NULL,
@@ -53,7 +57,16 @@ CREATE TABLE `propiedades` (
   `num_habitaciones` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `metros_cuadrados` float NOT NULL,
-  `fecha_creacion` datetime NOT NULL
+  `fecha_creacion` datetime NOT NULL,
+  PRIMARY KEY (`id_propiedad`),
+  UNIQUE KEY `nombre` (`nombre`),
+  KEY `propiedad-usuario` (`id_usuario`),
+  KEY `propiedad-direccion` (`id_direccion`),
+  KEY `precio` (`precio`),
+  KEY `banos` (`banos`),
+  KEY `ubicacion` (`ubicacion`),
+  KEY `num_habitaciones` (`num_habitaciones`),
+  KEY `metros_cuadrados` (`metros_cuadrados`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -62,65 +75,22 @@ CREATE TABLE `propiedades` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(30) NOT NULL,
-  `password` varchar(16) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `password` varchar(16) NOT NULL,
+  `secret` text NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
--- Índices para tablas volcadas
+-- Volcado de datos para la tabla `usuarios`
 --
 
---
--- Indices de la tabla `direcciones`
---
-ALTER TABLE `direcciones`
-  ADD PRIMARY KEY (`id_direccion`),
-  ADD KEY `colonia` (`colonia`);
-
---
--- Indices de la tabla `propiedades`
---
-ALTER TABLE `propiedades`
-  ADD PRIMARY KEY (`id_propiedad`),
-  ADD UNIQUE KEY `nombre` (`nombre`),
-  ADD KEY `propiedad-usuario` (`id_usuario`),
-  ADD KEY `propiedad-direccion` (`id_direccion`),
-  ADD KEY `precio` (`precio`),
-  ADD KEY `banos` (`banos`),
-  ADD KEY `ubicacion` (`ubicacion`),
-  ADD KEY `num_habitaciones` (`num_habitaciones`),
-  ADD KEY `metros_cuadrados` (`metros_cuadrados`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `usuario` (`usuario`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `direcciones`
---
-ALTER TABLE `direcciones`
-  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `propiedades`
---
-ALTER TABLE `propiedades`
-  MODIFY `id_propiedad` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+INSERT INTO `usuarios` (`id_usuario`, `usuario`, `password`, `secret`) VALUES
+(1, 'MarceloTorres', 'extreme89', 'b72c7654-74ac-495f-ba84-5125cf8a168e');
 
 --
 -- Restricciones para tablas volcadas

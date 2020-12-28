@@ -1,4 +1,4 @@
-package mx.uady.sicei.config;
+package mx.uady.ingestionDeDatos.config;
 
 import java.io.IOException;
 
@@ -19,8 +19,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.codec.binary.Base64;
 
-import mx.uady.sicei.model.Usuario;
-import mx.uady.sicei.repository.UsuarioRepository;
+import mx.uady.ingestionDeDatos.model.Usuario;
+import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {

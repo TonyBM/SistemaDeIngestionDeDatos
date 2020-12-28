@@ -1,9 +1,9 @@
-package mx.uady.sicei.repository;
+package mx.uady.ingestionDeDatos.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import mx.uady.sicei.model.Alumno;
+import mx.uady.ingestionDeDatos.model.Alumno;
 
 @Repository
 public interface AlumnoRepository extends CrudRepository<Alumno, Integer> {

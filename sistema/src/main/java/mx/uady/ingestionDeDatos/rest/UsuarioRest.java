@@ -1,6 +1,11 @@
-package mx.uady.sicei.rest;
+package mx.uady.ingestionDeDatos.rest;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import javax.json.JsonObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.uady.sicei.model.Usuario;
-import mx.uady.sicei.model.request.UsuarioRequest;
-import mx.uady.sicei.service.UsuarioService;
+import mx.uady.ingestionDeDatos.model.Usuario;
+import mx.uady.ingestionDeDatos.model.request.UsuarioRequest;
+import mx.uady.ingestionDeDatos.service.UsuarioService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +30,21 @@ public class UsuarioRest {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    // POST /api/register
+    @PostMapping("/register")
+    public ResponseEntity<Usuario> postUsuarios(@RequestBody @Valid UsuarioRequest request) throws URISyntaxException {
+        Usuario usuario = null;
+
+        if(request.getPassword().length() < 8) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(usuario);
+        }
+
+        usuario = usuarioService.crearUsuario(request);
+        return ResponseEntity
+            .created(new URI("/usuarios/" + usuario.getId()))
+            .body(usuario);
+    }
     
     //POST /api/login
     @PostMapping("/login")
@@ -71,6 +91,6 @@ public class UsuarioRest {
 
         return ResponseEntity
             .ok()
-            .body("Alumno Borrado");
+            .body("Usuario Borrado");
     }
 }

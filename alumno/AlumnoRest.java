@@ -1,4 +1,4 @@
-package mx.uady.sicei.rest;
+package mx.uady.ingestionDeDatos.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
-import mx.uady.sicei.exception.NotFoundException;
-import mx.uady.sicei.model.Alumno;
-import mx.uady.sicei.model.request.AlumnoRequest;
-import mx.uady.sicei.service.AlumnoSerivce;
+import mx.uady.ingestionDeDatos.exception.NotFoundException;
+import mx.uady.ingestionDeDatos.model.Alumno;
+import mx.uady.ingestionDeDatos.model.request.AlumnoRequest;
+import mx.uady.ingestionDeDatos.service.AlumnoSerivce;
 
 @RestController
 @RequestMapping("/api")
@@ -36,25 +36,6 @@ public class AlumnoRest {
     @GetMapping("/alumnos")
     public ResponseEntity<List<Alumno>> getAlumnos() {
         return ResponseEntity.ok().body(alumnoService.getAlumnos());
-    }
-
-    // POST /api/alumnos
-    @PostMapping("/register")
-    public ResponseEntity<Alumno> postAlumnos(@RequestBody @Valid AlumnoRequest request) throws URISyntaxException {
-        Alumno alumno = null;
-
-        if(request.getPassword().length() < 8) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(alumno);
-            
-        }
-        if(alumnoService.alumnoExiste(request)) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(alumno);
-        } 
-
-        alumno = alumnoService.crearAlumno(request);
-        return ResponseEntity
-            .created(new URI("/alumnos/" + alumno.getId()))
-            .body(alumno);
     }
 
     @GetMapping("/alumnos/{id}")

@@ -1,4 +1,4 @@
-package mx.uady.sicei.config;
+package mx.uady.ingestionDeDatos.config;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +14,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.time.ZonedDateTime;
-import mx.uady.sicei.model.Usuario;
+import mx.uady.ingestionDeDatos.model.Usuario;
 import io.jsonwebtoken.JwtException;
 
 @Component

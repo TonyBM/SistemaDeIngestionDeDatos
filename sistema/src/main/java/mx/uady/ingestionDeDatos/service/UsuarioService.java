@@ -1,4 +1,4 @@
-package mx.uady.sicei.service;
+package mx.uady.ingestionDeDatos.service;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -16,13 +16,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.uady.sicei.exception.NotFoundException;
-import mx.uady.sicei.model.Alumno;
-import mx.uady.sicei.model.Usuario;
-import mx.uady.sicei.model.request.UsuarioRequest;
-import mx.uady.sicei.repository.AlumnoRepository;
-import mx.uady.sicei.repository.UsuarioRepository;
-import mx.uady.sicei.config.JwtTokenUtil;
+import mx.uady.ingestionDeDatos.exception.NotFoundException;
+import mx.uady.ingestionDeDatos.model.Usuario;
+import mx.uady.ingestionDeDatos.model.request.UsuarioRequest;
+import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
+import mx.uady.ingestionDeDatos.config.JwtTokenUtil;
 
 import static org.apache.commons.codec.digest.HmacUtils.hmacSha256;
 
@@ -33,9 +31,6 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private AlumnoRepository alumnoRepository;
-
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
     public List<Usuario> getUsuarios() {
@@ -43,7 +38,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario crear(UsuarioRequest request) {
+    public Usuario crearUsuario(UsuarioRequest request) {
         Usuario usuarioCrear = new Usuario();
 
         usuarioCrear.setUsuario(request.getUsuario());
@@ -53,13 +48,6 @@ public class UsuarioService {
         usuarioCrear.setSecret(secret);
 
         Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear);
-
-        Alumno alumno = new Alumno();
-
-        alumno.setNombre(request.getNombre());
-        alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
-
-        alumnoRepository.save(alumno);
 
         return usuarioGuardado;
     }
@@ -153,7 +141,7 @@ public class UsuarioService {
             throw new NotFoundException("La entidad usuario no pudo ser encontrada.");
         }
         
-        alumnoRepository.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
 
 }

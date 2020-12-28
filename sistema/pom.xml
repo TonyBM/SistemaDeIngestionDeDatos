@@ -12,11 +12,11 @@
 	</parent>
 
 	<groupId>mx.uady</groupId>
-	<artifactId>sicei</artifactId>
+	<artifactId>ingestionDeDatos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
-	<name>sicei</name>
-	<description>Ejemplo de REST</description>
+	<name>ingestionDeDatos</name>
+	<description>Aplicacion 1 Ingestion De Datos</description>
 
 	<properties>
 		<java.version>1.8</java.version>
