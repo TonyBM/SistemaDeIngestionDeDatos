@@ -35,7 +35,7 @@ public class Propiedad {
     @Column(name = "banos")
     @Getter
     @Setter
-    private String banos;
+    private Integer banos;
 
     @Column(name = "ubicacion")
     @Getter

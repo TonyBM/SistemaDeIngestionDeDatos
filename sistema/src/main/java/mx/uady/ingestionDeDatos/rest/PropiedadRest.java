@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.uady.ingestionDeDatos.model.Propiedad;
-import mx.uady.ingestionDeDatos.model.request.UsuarioRequest;
+import mx.uady.ingestionDeDatos.model.request.FindPropiedadRequest;
 import mx.uady.ingestionDeDatos.service.PropiedadService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.data.domain.Page;
 
 @RestController
 @RequestMapping("/api")
@@ -32,12 +33,18 @@ public class PropiedadRest {
     private PropiedadService propiedadService;
 
     // GET /api/usuarios
-    @GetMapping("/propiedades")
-    public ResponseEntity<List<Propiedad>> obtenerPropiedad() {
-        List<Propiedad> propiedades = propiedadService.getPropiedades();
+    @GetMapping("/propiedades/{page}")
+    public ResponseEntity<Page<Propiedad>> obtenerPropiedad(@PathVariable Integer page) {
+        Page<Propiedad> propiedades = propiedadService.getPropiedades(page);
         return ResponseEntity.ok(propiedades);
     }
 
+    @PostMapping("/findPropiedad/{}page")
+    public ResponseEntity<List<Propiedad>> obtenerPropiedadConFiltro(@RequestBody FindPropiedadRequest request, @PathVariable Integer page) {
+
+        List<Propiedad> propiedades = propiedadService.getPropiedadesFiltradas(request.getType(), request.getValue(), page);
+        return ResponseEntity.ok(propiedades);
+    }
     /*
     // GET /api/usuario/3
     @GetMapping("/usuario/{id}")
