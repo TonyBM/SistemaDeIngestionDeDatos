@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.Base64;
+import java.util.Optional;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -40,6 +41,10 @@ public class PropiedadService {
 
     public Page<Propiedad> getPropiedades(Integer page) {
         return propiedadRepository.findAll(PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+    }
+
+    public Optional<Propiedad> getPropiedadById(Integer id) {
+        return propiedadRepository.findById(id);
     }
 
     public List<Propiedad> getPropiedadesFiltradas(String type, String value, Integer page) {

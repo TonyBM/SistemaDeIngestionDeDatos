@@ -3,6 +3,7 @@ package mx.uady.ingestionDeDatos.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -39,18 +40,17 @@ public class PropiedadRest {
         return ResponseEntity.ok(propiedades);
     }
 
-    @PostMapping("/findPropiedad/{}page")
+    @PostMapping("/findPropiedad/{page}")
     public ResponseEntity<List<Propiedad>> obtenerPropiedadConFiltro(@RequestBody FindPropiedadRequest request, @PathVariable Integer page) {
 
         List<Propiedad> propiedades = propiedadService.getPropiedadesFiltradas(request.getType(), request.getValue(), page);
         return ResponseEntity.ok(propiedades);
     }
-    /*
-    // GET /api/usuario/3
-    @GetMapping("/usuario/{id}")
-    public ResponseEntity<Usuario> getUsuario(@PathVariable Integer id) {
-        Usuario u = usuarioService.getUsuario(id);
-        return ResponseEntity.status(HttpStatus.OK).body(u);
-    }*/
+    
+    @GetMapping("/propiedad/{id}")
+    public ResponseEntity<Optional<Propiedad>> getPropiedadById(@PathVariable Integer id) {
+        Optional<Propiedad> propiedad = propiedadService.getPropiedadById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(propiedad);
+    }
     
 }
