@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.uady.ingestionDeDatos.model.Propiedad;
 import mx.uady.ingestionDeDatos.model.request.FindPropiedadRequest;
+import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
 import mx.uady.ingestionDeDatos.service.PropiedadService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,14 @@ public class PropiedadRest {
     public ResponseEntity<Optional<Propiedad>> getPropiedadById(@PathVariable Integer id) {
         Optional<Propiedad> propiedad = propiedadService.getPropiedadById(id);
         return ResponseEntity.status(HttpStatus.OK).body(propiedad);
+    }
+    
+    @PostMapping("/createPropiedad")
+    public ResponseEntity<Propiedad> postPropiedad(@RequestBody @Valid PropiedadRequest request) throws URISyntaxException {
+        Propiedad propiedad = propiedadService.crearPropiedad(request);
+        return ResponseEntity
+            .created(new URI("/propiedades/" + propiedad.getIdPropiedad()))
+            .body(propiedad);
     }
     
 }

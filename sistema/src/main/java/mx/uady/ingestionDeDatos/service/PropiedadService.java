@@ -28,6 +28,7 @@ import static org.apache.commons.codec.digest.HmacUtils.hmacSha256;
 
 import mx.uady.ingestionDeDatos.repository.PropiedadRepository;
 import mx.uady.ingestionDeDatos.model.Propiedad;
+import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 
@@ -65,5 +66,25 @@ public class PropiedadService {
             default:
                 return new ArrayList<Propiedad>();
         }
+    }
+    
+    @Transactional
+    public Propiedad crearPropiedad(PropiedadRequest request) {
+        Propiedad propiedadCreada = new Propiedad();
+        
+        propiedadCreada.setNombre(request.getNombre());
+        propiedadCreada.setPrecio(request.getPrecio());
+        propiedadCreada.setBanos(request.getBanos());
+        propiedadCreada.setUbicacion(request.getUbicacion());
+        propiedadCreada.setIdDireccion(request.getIdDireccion());
+        propiedadCreada.setFechaPublicacion(request.getFechaPublicacion());
+        propiedadCreada.setNumHabitaciones(request.getNumHabitaciones());
+        propiedadCreada.setIdUsuario(request.getIdUsuario());
+        propiedadCreada.setMetrosCuadrados(request.getMetrosCuadrados());
+        propiedadCreada.setFecha_creacion(request.getFechaCreacion());
+        
+        Propiedad propiedadGuardada = propiedadRepository.save(propiedadCreada);
+        
+        return propiedadGuardada;
     }
 }

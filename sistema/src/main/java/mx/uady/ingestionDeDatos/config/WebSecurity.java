@@ -26,7 +26,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .httpBasic().disable()
             .authorizeRequests()
-                .antMatchers("/api/login", "/api/register").permitAll()
+                .antMatchers("/api/login", "/api/register", "/api/propiedad/{[0-9]+}").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .addFilterBefore(jwtRequestFilter, BasicAuthenticationFilter.class);
