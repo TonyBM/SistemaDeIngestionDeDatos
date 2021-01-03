@@ -66,4 +66,17 @@ public class PropiedadService {
                 return new ArrayList<Propiedad>();
         }
     }
+
+    public String borrarPropiedad(Integer id) {
+
+        Optional<Propiedad> opt = propiedadRepository.findById(id);
+
+        if(!opt.isPresent()){
+            throw new NotFoundException("La propiedad no pudo ser encontrada.");
+        }
+
+        propiedadRepository.deleteById(id);
+        return "La propiedad "+id+" ha sido borrada";
+
+    }
 }

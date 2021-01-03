@@ -9,6 +9,8 @@ import javax.validation.Valid;
 
 import javax.json.JsonObject;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,6 @@ public class PropiedadRest {
     @Autowired
     private PropiedadService propiedadService;
 
-    // GET /api/usuarios
     @GetMapping("/propiedades/{page}")
     public ResponseEntity<Page<Propiedad>> obtenerPropiedad(@PathVariable Integer page) {
         Page<Propiedad> propiedades = propiedadService.getPropiedades(page);
@@ -51,6 +52,16 @@ public class PropiedadRest {
     public ResponseEntity<Optional<Propiedad>> getPropiedadById(@PathVariable Integer id) {
         Optional<Propiedad> propiedad = propiedadService.getPropiedadById(id);
         return ResponseEntity.status(HttpStatus.OK).body(propiedad);
+    }
+
+    @DeleteMapping("/propiedad/{id}")
+    public ResponseEntity deletePropiedad(@PathVariable Integer id){
+
+        String response = propiedadService.borrarPropiedad(id);
+
+        return ResponseEntity
+            .ok()
+            .body(Collections.singletonMap("Respuesta", response));
     }
     
 }
