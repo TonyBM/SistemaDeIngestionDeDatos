@@ -17,26 +17,26 @@ import javax.transaction.Transactional;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import static org.apache.commons.codec.digest.HmacUtils.hmacSha256;
 
 import mx.uady.ingestionDeDatos.exception.NotFoundException;
 import mx.uady.ingestionDeDatos.model.Usuario;
 import mx.uady.ingestionDeDatos.model.request.UsuarioRequest;
 import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 import mx.uady.ingestionDeDatos.config.JwtTokenUtil;
-import org.springframework.data.domain.PageRequest;
-import static org.apache.commons.codec.digest.HmacUtils.hmacSha256;
-
 import mx.uady.ingestionDeDatos.repository.PropiedadRepository;
 import mx.uady.ingestionDeDatos.model.Propiedad;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Page;
+import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
 
 @Service
 public class PropiedadService {
 
     @Autowired
     private PropiedadRepository propiedadRepository;
-    
+
     private final Integer PAGE_SIZE = 5;
 
     public Page<Propiedad> getPropiedades(Integer page) {
@@ -51,7 +51,7 @@ public class PropiedadService {
 
         switch(type) {
             case "name":
-                return propiedadRepository.findByNombre(value, PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad"))); 
+                return propiedadRepository.findByNombre(value, PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "precio":
                 return propiedadRepository.findByPrecio(Float.parseFloat(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "baños":
@@ -78,5 +78,25 @@ public class PropiedadService {
         propiedadRepository.deleteById(id);
         return "La propiedad "+id+" ha sido borrada";
 
+    }
+
+    @Transactional
+    public Propiedad crearPropiedad(PropiedadRequest request, Integer idDireccion) {
+        Propiedad propiedadCreada = new Propiedad();
+
+        propiedadCreada.setNombre(request.getNombre());
+        propiedadCreada.setPrecio(request.getPrecio());
+        propiedadCreada.setBanos(request.getBanos());
+        propiedadCreada.setUbicacion(request.getUbicacion());
+        propiedadCreada.setIdDireccion(idDireccion);
+        propiedadCreada.setFechaPublicacion(request.getFechaPublicacion());
+        propiedadCreada.setNumHabitaciones(request.getNumHabitaciones());
+        propiedadCreada.setIdUsuario(request.getIdUsuario());
+        propiedadCreada.setMetrosCuadrados(request.getMetrosCuadrados());
+        propiedadCreada.setFecha_creacion(request.getFechaCreacion());
+
+        Propiedad propiedadGuardada = propiedadRepository.save(propiedadCreada);
+
+        return propiedadGuardada;
     }
 }
