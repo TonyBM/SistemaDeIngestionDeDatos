@@ -19,14 +19,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import mx.uady.ingestionDeDatos.model.Propiedad;
-import mx.uady.ingestionDeDatos.model.request.FindPropiedadRequest;
-import mx.uady.ingestionDeDatos.service.PropiedadService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.data.domain.Page;
+
+import mx.uady.ingestionDeDatos.model.Propiedad;
+import mx.uady.ingestionDeDatos.model.request.FindPropiedadRequest;
+import mx.uady.ingestionDeDatos.service.PropiedadService;
+import mx.uady.ingestionDeDatos.model.Direccion;
 
 @RestController
 @RequestMapping("/api")
@@ -34,6 +35,9 @@ public class PropiedadRest {
 
     @Autowired
     private PropiedadService propiedadService;
+
+    @Autowired
+    private DireccionService direccionService;
 
     @GetMapping("/propiedades/{page}")
     public ResponseEntity<Page<Propiedad>> obtenerPropiedad(@PathVariable Integer page) {
@@ -47,7 +51,7 @@ public class PropiedadRest {
         List<Propiedad> propiedades = propiedadService.getPropiedadesFiltradas(request.getType(), request.getValue(), page);
         return ResponseEntity.ok(propiedades);
     }
-    
+
     @GetMapping("/propiedad/{id}")
     public ResponseEntity<Optional<Propiedad>> getPropiedadById(@PathVariable Integer id) {
         Optional<Propiedad> propiedad = propiedadService.getPropiedadById(id);
@@ -63,5 +67,14 @@ public class PropiedadRest {
             .ok()
             .body(Collections.singletonMap("Respuesta", response));
     }
-    
+
+    @PostMapping("/propiedades")
+    public ResponseEntity<Propiedad> postPropiedad(@RequestBody @Valid PropiedadRequest request) throws URISyntaxException {
+        Direccion direccion = direccionService.crearDireccion(request.getDireccion());
+        Propiedad propiedad = propiedadService.crearPropiedad(request, direccion.getIdDireccion());
+        return ResponseEntity
+            .created(new URI("/propiedades/" + propiedad.getIdPropiedad()))
+            .body(propiedad);
+    }
+
 }
