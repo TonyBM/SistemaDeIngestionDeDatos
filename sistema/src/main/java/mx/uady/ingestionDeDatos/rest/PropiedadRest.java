@@ -79,4 +79,13 @@ public class PropiedadRest {
             .body(propiedad);
     }
 
+    @PutMapping("/propiedades/{id}")
+    public ResponseEntity<Propiedad> putPropiedad(@PathVariable Integer id, @RequestBody @Valid PropiedadRequest request) throws URISyntaxException{
+        Propiedad propiedad = propiedadService.editarPropiedad(id, request);
+        Direccion direccion = direccionService.editarDireccion(propiedad.getIdDireccion(), request.getDireccion());
+        return ResponseEntity
+            .ok()
+            .body(propiedad);
+    }
+
 }

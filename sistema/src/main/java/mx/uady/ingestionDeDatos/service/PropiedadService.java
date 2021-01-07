@@ -99,4 +99,21 @@ public class PropiedadService {
 
         return propiedadGuardada;
     }
+
+    @Transactional
+    public Propiedad editarPropiedad(Integer idPropiedad, PropiedadRequest request){
+        return propiedadRepository.findById(idPropiedad)
+        .map(propiedad -> {
+            propiedad.setNombre(request.getNombre());
+            propiedad.setPrecio(request.getPrecio());
+            propiedad.setBanos(request.getBanos());
+            propiedad.setUbicacion(request.getUbicacion());
+            propiedad.setFechaPublicacion(request.getFechaPublicacion());
+            propiedad.setNumHabitaciones(request.getNumHabitaciones());
+            propiedad.setMetrosCuadrados(request.getMetrosCuadrados());
+            propiedad.setFecha_creacion(request.getFechaCreacion());
+            return propiedadRepository.save(propiedad);
+        })
+        .orElseThrow(() -> new NotFoundException("La entidad propiedad no pudo ser encontrada."));
+    }
 }
