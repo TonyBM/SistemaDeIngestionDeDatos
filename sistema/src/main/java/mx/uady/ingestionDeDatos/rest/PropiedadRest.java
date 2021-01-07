@@ -28,6 +28,8 @@ import mx.uady.ingestionDeDatos.model.Propiedad;
 import mx.uady.ingestionDeDatos.model.request.FindPropiedadRequest;
 import mx.uady.ingestionDeDatos.service.PropiedadService;
 import mx.uady.ingestionDeDatos.model.Direccion;
+import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
+import mx.uady.ingestionDeDatos.service.DireccionService;
 
 @RestController
 @RequestMapping("/api")
