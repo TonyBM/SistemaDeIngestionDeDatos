@@ -14,6 +14,7 @@ import java.util.StringTokenizer;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.transaction.Transactional;
+import mx.uady.ingestionDeDatos.config.DecodedToken;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class PropiedadService {
     private PropiedadRepository propiedadRepository;
 
     @Autowired DireccionRepository direccionRepository;
+    
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     private final Integer PAGE_SIZE = 5;
 
@@ -129,7 +133,8 @@ public class PropiedadService {
     }
 
     @Transactional
-    public Propiedad crearPropiedad(PropiedadRequest request, Integer idDireccion) {
+    public Propiedad crearPropiedad(PropiedadRequest request, Integer page, Integer idDireccion) {
+
         Propiedad propiedadCreada = new Propiedad();
 
         propiedadCreada.setNombre(request.getNombre());
@@ -137,15 +142,22 @@ public class PropiedadService {
         propiedadCreada.setBanos(request.getBanos());
         propiedadCreada.setUbicacion(request.getUbicacion());
         propiedadCreada.setIdDireccion(idDireccion);
-        propiedadCreada.setFechaPublicacion(request.getFechaPublicacion());
+        propiedadCreada.setFechaPublicacion(new Date());
         propiedadCreada.setNumHabitaciones(request.getNumHabitaciones());
         propiedadCreada.setIdUsuario(request.getIdUsuario());
         propiedadCreada.setMetrosCuadrados(request.getMetrosCuadrados());
-        propiedadCreada.setFecha_creacion(request.getFechaCreacion());
+        propiedadCreada.setFecha_creacion(new Date());
+        
+        List<Propiedad> propiedades = this.getPropiedadesFiltradas("name", request.getNombre(), page);
 
-        Propiedad propiedadGuardada = propiedadRepository.save(propiedadCreada);
-
-        return propiedadGuardada;
+        if(propiedades.isEmpty()) {
+            Propiedad propiedadGuardada = propiedadRepository.save(propiedadCreada);
+            return propiedadGuardada;
+        }
+        else {
+            throw new RuntimeException("Propiedad repetida.");
+        }
+        
     }
 
     private Direccion crearDireccionParaCasa(Direccion direccion) {

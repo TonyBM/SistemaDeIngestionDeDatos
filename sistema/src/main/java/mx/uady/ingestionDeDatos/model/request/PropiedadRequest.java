@@ -49,7 +49,6 @@ public class PropiedadRequest {
     @Setter
     private DireccionRequest direccion;
     
-    @NotNull
     @Getter
     @Setter
     private Date fechaPublicacion; //yyyy-MM-dd hh:mm:ss
@@ -69,7 +68,6 @@ public class PropiedadRequest {
     @Setter
     private Float metrosCuadrados;
     
-    @NotNull
     @Getter
     @Setter
     private Date fechaCreacion; //yyyy-MM-dd hh:mm:ss
