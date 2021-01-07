@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.StringTokenizer;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.multipart.MultipartFile;
 import static org.apache.commons.codec.digest.HmacUtils.hmacSha256;
 
 import mx.uady.ingestionDeDatos.exception.NotFoundException;
@@ -29,13 +31,17 @@ import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 import mx.uady.ingestionDeDatos.config.JwtTokenUtil;
 import mx.uady.ingestionDeDatos.repository.PropiedadRepository;
 import mx.uady.ingestionDeDatos.model.Propiedad;
+import mx.uady.ingestionDeDatos.model.Direccion;
 import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
+import mx.uady.ingestionDeDatos.repository.DireccionRepository;
 
 @Service
 public class PropiedadService {
 
     @Autowired
     private PropiedadRepository propiedadRepository;
+
+    @Autowired DireccionRepository direccionRepository;
 
     private final Integer PAGE_SIZE = 5;
 
@@ -80,6 +86,48 @@ public class PropiedadService {
 
     }
 
+    public List<Propiedad> cargaMasiva(MultipartFile archivoPropiedades) {
+        ArrayList<Propiedad> listaPropiedades = new ArrayList<Propiedad>();
+        try{
+            String contenido = new String(archivoPropiedades.getBytes());
+            String[] lineas = contenido.split("\n");
+            StringTokenizer atributos;
+            Propiedad propiedadAux;
+            Direccion direccionAux;
+            for(String linea: lineas) {
+
+                propiedadAux = new Propiedad();
+            direccionAux = new Direccion();
+            atributos = new StringTokenizer(linea, ",");
+            propiedadAux.setNombre(atributos.nextToken());
+            propiedadAux.setPrecio(Float.parseFloat(atributos.nextToken()));
+            propiedadAux.setBanos(Integer.parseInt(atributos.nextToken()));
+            propiedadAux.setUbicacion(atributos.nextToken());
+                
+            direccionAux.setCalle(atributos.nextToken());
+            direccionAux.setNumero(atributos.nextToken());
+            direccionAux.setCruzamientos(atributos.nextToken());
+            direccionAux.setColonia(atributos.nextToken());
+            direccionAux.setCodigoPostal(atributos.nextToken());
+            propiedadAux.setIdDireccion(this.crearDireccionParaCasa(direccionAux).getIdDireccion());
+
+            propiedadAux.setFechaPublicacion(new Date());
+            propiedadAux.setNumHabitaciones(Integer.parseInt(atributos.nextToken()));
+            propiedadAux.setIdUsuario(Integer.parseInt(atributos.nextToken()));
+            propiedadAux.setMetrosCuadrados(Float.parseFloat(atributos.nextToken()));
+            propiedadAux.setFecha_creacion(new Date());
+            listaPropiedades.add(propiedadAux);
+            }
+
+
+        } catch (Exception e) {
+            return new ArrayList<Propiedad>();
+        };
+        listaPropiedades.forEach((propiedad) -> propiedadRepository.save(propiedad));
+
+        return listaPropiedades;
+    }
+
     @Transactional
     public Propiedad crearPropiedad(PropiedadRequest request, Integer idDireccion) {
         Propiedad propiedadCreada = new Propiedad();
@@ -98,5 +146,12 @@ public class PropiedadService {
         Propiedad propiedadGuardada = propiedadRepository.save(propiedadCreada);
 
         return propiedadGuardada;
+    }
+
+    private Direccion crearDireccionParaCasa(Direccion direccion) {
+       
+        Direccion direccionGuardada = direccionRepository.save(direccion);
+        
+        return direccionGuardada;
     }
 }

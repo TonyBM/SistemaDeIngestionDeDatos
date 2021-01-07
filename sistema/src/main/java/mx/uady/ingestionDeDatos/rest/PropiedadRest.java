@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.data.domain.Page;
+import org.springframework.web.multipart.MultipartFile;
 
 import mx.uady.ingestionDeDatos.model.Propiedad;
 import mx.uady.ingestionDeDatos.model.request.FindPropiedadRequest;
@@ -77,6 +78,14 @@ public class PropiedadRest {
         return ResponseEntity
             .created(new URI("/propiedades/" + propiedad.getIdPropiedad()))
             .body(propiedad);
+    }
+    @PostMapping("/propiedades/carga_masiva")
+    public ResponseEntity<List<Propiedad>> cargaMasiva(@RequestBody MultipartFile listaPropiedades) throws URISyntaxException {
+        List<Propiedad> propiedades = propiedadService.cargaMasiva(listaPropiedades);
+
+        return ResponseEntity
+            .created(new URI("/propiedades/carga_masiva"))
+            .body(propiedades);
     }
 
 }
