@@ -85,6 +85,9 @@ public class PropiedadService {
             throw new NotFoundException("La propiedad no pudo ser encontrada.");
         }
 
+        Propiedad propiedad = opt.get();
+
+        direccionRepository.deleteById(propiedad.getIdDireccion());
         propiedadRepository.deleteById(id);
         return "La propiedad "+id+" ha sido borrada";
 
