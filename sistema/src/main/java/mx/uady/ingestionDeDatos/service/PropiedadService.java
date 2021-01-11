@@ -30,48 +30,49 @@ import mx.uady.ingestionDeDatos.model.Usuario;
 import mx.uady.ingestionDeDatos.model.request.UsuarioRequest;
 import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 import mx.uady.ingestionDeDatos.config.JwtTokenUtil;
-import mx.uady.ingestionDeDatos.repository.PropiedadRepository;
 import mx.uady.ingestionDeDatos.model.Propiedad;
 import mx.uady.ingestionDeDatos.model.Direccion;
 import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
 import mx.uady.ingestionDeDatos.repository.DireccionRepository;
+import mx.uady.ingestionDeDatos.repository.PagedPropiedadRepository;
+import mx.uady.ingestionDeDatos.repository.PropiedadRepository;
 
 @Service
 public class PropiedadService {
 
     @Autowired
-    private PropiedadRepository propiedadRepository;
+    private PagedPropiedadRepository pagedPropiedadRepository;
 
     @Autowired DireccionRepository direccionRepository;
     
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private PropiedadRepository propiedadRepository;
 
     private final Integer PAGE_SIZE = 5;
 
     public Page<Propiedad> getPropiedades(Integer page) {
-        return propiedadRepository.findAll(PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+        return pagedPropiedadRepository.findAll(PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
     }
 
     public Optional<Propiedad> getPropiedadById(Integer id) {
-        return propiedadRepository.findById(id);
+        return pagedPropiedadRepository.findById(id);
     }
 
     public List<Propiedad> getPropiedadesFiltradas(String type, String value, Integer page) {
 
         switch(type) {
             case "name":
-                return propiedadRepository.findByNombre(value, PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+                return pagedPropiedadRepository.findByNombre(value, PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "precio":
-                return propiedadRepository.findByPrecio(Float.parseFloat(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+                return pagedPropiedadRepository.findByPrecio(Float.parseFloat(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "baños":
-                return propiedadRepository.findByBanos(Integer.parseInt(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+                return pagedPropiedadRepository.findByBanos(Integer.parseInt(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "ubicacion":
-                return propiedadRepository.findByUbicacion(value, PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+                return pagedPropiedadRepository.findByUbicacion(value, PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "habitaciones":
-                return propiedadRepository.findByNumHabitaciones(Integer.parseInt(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+                return pagedPropiedadRepository.findByNumHabitaciones(Integer.parseInt(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "area":
-                return propiedadRepository.findByMetrosCuadrados(Float.parseFloat(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+                return pagedPropiedadRepository.findByMetrosCuadrados(Float.parseFloat(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             default:
                 return new ArrayList<Propiedad>();
         }
@@ -79,7 +80,7 @@ public class PropiedadService {
 
     public String borrarPropiedad(Integer id) {
 
-        Optional<Propiedad> opt = propiedadRepository.findById(id);
+        Optional<Propiedad> opt = pagedPropiedadRepository.findById(id);
 
         if(!opt.isPresent()){
             throw new NotFoundException("La propiedad no pudo ser encontrada.");
@@ -88,7 +89,7 @@ public class PropiedadService {
         Propiedad propiedad = opt.get();
 
         direccionRepository.deleteById(propiedad.getIdDireccion());
-        propiedadRepository.deleteById(id);
+        pagedPropiedadRepository.deleteById(id);
         return "La propiedad "+id+" ha sido borrada";
 
     }
@@ -130,13 +131,13 @@ public class PropiedadService {
         } catch (Exception e) {
             return new ArrayList<Propiedad>();
         };
-        listaPropiedades.forEach((propiedad) -> propiedadRepository.save(propiedad));
+        listaPropiedades.forEach((propiedad) -> pagedPropiedadRepository.save(propiedad));
 
         return listaPropiedades;
     }
 
     @Transactional
-    public Propiedad crearPropiedad(PropiedadRequest request, Integer page, Integer idDireccion) {
+    public Propiedad crearPropiedad(PropiedadRequest request, Integer idDireccion) {
 
         Propiedad propiedadCreada = new Propiedad();
 
@@ -151,7 +152,7 @@ public class PropiedadService {
         propiedadCreada.setMetrosCuadrados(request.getMetrosCuadrados());
         propiedadCreada.setFecha_creacion(new Date());
         
-        List<Propiedad> propiedades = this.getPropiedadesFiltradas("name", request.getNombre(), page);
+        List<Propiedad> propiedades = propiedadRepository.findByNombre(request.getNombre());
 
         if(propiedades.isEmpty()) {
             Propiedad propiedadGuardada = propiedadRepository.save(propiedadCreada);
@@ -171,7 +172,7 @@ public class PropiedadService {
     }
     @Transactional
     public Propiedad editarPropiedad(Integer idPropiedad, PropiedadRequest request){
-        return propiedadRepository.findById(idPropiedad)
+        return pagedPropiedadRepository.findById(idPropiedad)
         .map(propiedad -> {
             propiedad.setNombre(request.getNombre());
             propiedad.setPrecio(request.getPrecio());
@@ -181,7 +182,7 @@ public class PropiedadService {
             propiedad.setNumHabitaciones(request.getNumHabitaciones());
             propiedad.setMetrosCuadrados(request.getMetrosCuadrados());
             propiedad.setFecha_creacion(request.getFechaCreacion());
-            return propiedadRepository.save(propiedad);
+            return pagedPropiedadRepository.save(propiedad);
         })
         .orElseThrow(() -> new NotFoundException("La entidad propiedad no pudo ser encontrada."));
     }

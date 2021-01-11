@@ -71,10 +71,10 @@ public class PropiedadRest {
             .body(Collections.singletonMap("Respuesta", response));
     }
 
-    @PostMapping("/propiedades/{page}")
-    public ResponseEntity<Propiedad> postPropiedad(@RequestBody @Valid PropiedadRequest request, @PathVariable Integer page) throws URISyntaxException {
+    @PostMapping("/propiedades")
+    public ResponseEntity<Propiedad> postPropiedad(@RequestBody @Valid PropiedadRequest request) throws URISyntaxException {
         Direccion direccion = direccionService.crearDireccion(request.getDireccion());
-        Propiedad propiedad = propiedadService.crearPropiedad(request, page, direccion.getIdDireccion());
+        Propiedad propiedad = propiedadService.crearPropiedad(request,direccion.getIdDireccion());
         return ResponseEntity
             .created(new URI("/propiedades/" + propiedad.getIdPropiedad()))
             .body(propiedad);
