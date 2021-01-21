@@ -89,7 +89,7 @@ public class PropiedadService {
         Propiedad propiedad = opt.get();
 
         direccionRepository.deleteById(propiedad.getIdDireccion());
-        pagedPropiedadRepository.deleteById(id);
+        //pagedPropiedadRepository.deleteById(id);
         return "La propiedad "+id+" ha sido borrada";
 
     }
