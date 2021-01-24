@@ -103,28 +103,27 @@ public class PropiedadService {
             Propiedad propiedadAux;
             Direccion direccionAux;
             for(String linea: lineas) {
-
                 propiedadAux = new Propiedad();
-            direccionAux = new Direccion();
-            atributos = new StringTokenizer(linea, ",");
-            propiedadAux.setNombre(atributos.nextToken());
-            propiedadAux.setPrecio(Float.parseFloat(atributos.nextToken()));
-            propiedadAux.setBanos(Integer.parseInt(atributos.nextToken()));
-            propiedadAux.setUbicacion(atributos.nextToken());
-                
-            direccionAux.setCalle(atributos.nextToken());
-            direccionAux.setNumero(atributos.nextToken());
-            direccionAux.setCruzamientos(atributos.nextToken());
-            direccionAux.setColonia(atributos.nextToken());
-            direccionAux.setCodigoPostal(atributos.nextToken());
-            propiedadAux.setIdDireccion(this.crearDireccionParaCasa(direccionAux).getIdDireccion());
+                direccionAux = new Direccion();
+                atributos = new StringTokenizer(linea, ",");
+                propiedadAux.setNombre(atributos.nextToken());
+                propiedadAux.setPrecio(Float.parseFloat(atributos.nextToken()));
+                propiedadAux.setBanos(Integer.parseInt(atributos.nextToken()));
+                propiedadAux.setUbicacion(atributos.nextToken());
+                    
+                direccionAux.setCalle(atributos.nextToken());
+                direccionAux.setNumero(atributos.nextToken());
+                direccionAux.setCruzamientos(atributos.nextToken());
+                direccionAux.setColonia(atributos.nextToken());
+                direccionAux.setCodigoPostal(atributos.nextToken());
+                propiedadAux.setIdDireccion(this.crearDireccionParaCasa(direccionAux).getIdDireccion());
 
-            propiedadAux.setFechaPublicacion(new Date());
-            propiedadAux.setNumHabitaciones(Integer.parseInt(atributos.nextToken()));
-            propiedadAux.setIdUsuario(Integer.parseInt(atributos.nextToken()));
-            propiedadAux.setMetrosCuadrados(Float.parseFloat(atributos.nextToken()));
-            propiedadAux.setFecha_creacion(new Date());
-            listaPropiedades.add(propiedadAux);
+                propiedadAux.setFechaPublicacion(new Date());
+                propiedadAux.setNumHabitaciones(Integer.parseInt(atributos.nextToken()));
+                propiedadAux.setIdUsuario(Integer.parseInt(atributos.nextToken()));
+                propiedadAux.setMetrosCuadrados(Float.parseFloat(atributos.nextToken()));
+                propiedadAux.setFecha_creacion(new Date());
+                listaPropiedades.add(propiedadAux);
             }
 
 
