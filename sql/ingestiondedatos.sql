@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-01-2021 a las 01:16:19
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.11
+-- Tiempo de generación: 24-01-2021 a las 01:50:19
+-- Versión del servidor: 10.4.16-MariaDB
+-- Versión de PHP: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,20 @@ CREATE TABLE `direcciones` (
   `codigo_postal` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `direcciones`
+--
+
+INSERT INTO `direcciones` (`id_direccion`, `calle`, `numero`, `cruzamientos`, `colonia`, `codigo_postal`) VALUES
+(2, '50', '284', '45 y 43', 'Amapola 43', '97000'),
+(4, '50', '284', '45 y 43', 'Amapola 43', '97000'),
+(5, '50', '284', '45 y 43', 'Amapola 43', '97000'),
+(6, '50', '284', '45 y 43', 'Amapola 43', '97000'),
+(7, '14', '12', '5 y 5a', 'tepito', '97130'),
+(8, '14', '12', '5 y 5a', 'tepito', '97130'),
+(9, '14', '12', '5 y 5a', 'tepito', '97130'),
+(10, '14', '12', '5 y 5a', 'tepito', '97130');
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +70,31 @@ CREATE TABLE `propiedades` (
   `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `propiedades`
+--
+
+INSERT INTO `propiedades` (`id_propiedad`, `nombre`, `precio`, `banos`, `ubicacion`, `id_direccion`, `fecha_publicacion`, `num_habitaciones`, `id_usuario`, `metros_cuadrados`, `fecha_creacion`) VALUES
+(4, 'casa amarilla', 4806090, 2, 'sur', 4, '2021-01-11 18:06:48', 2, 1, 60, '2021-01-11 18:06:48'),
+(5, 'casa amarilla 2', 4806090, 2, 'sur', 6, '2021-01-11 19:13:31', 2, 1, 60, '2021-01-11 19:13:31'),
+(8, 'casa amarilla 3', 1000000, 1, 'norte', 7, '2021-01-23 18:48:32', 2, 1, 300, '2021-01-23 18:48:32'),
+(9, 'casa amarilla 4', 1000000, 1, 'sur', 7, '2021-01-23 18:48:32', 2, 1, 350, '2021-01-23 18:48:32');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `regresiones_lineales`
+--
+
+CREATE TABLE `regresiones_lineales` (
+  `id_regresion` int(11) NOT NULL,
+  `q1` varchar(20) NOT NULL,
+  `q2` varchar(20) NOT NULL,
+  `q3` varchar(20) NOT NULL,
+  `intercepto` varchar(20) NOT NULL,
+  `fecha_regresion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 
 --
@@ -74,7 +113,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `usuario`, `password`, `secret`) VALUES
-(1, 'MarceloTorres', 'extreme89', '6996a5db-af1c-4eb6-ab42-339480b29a63');
+(1, 'MarceloTorres', 'extreme89', 'b5217cab-e7b3-4ee3-98b3-9221d3e15dae');
 
 --
 -- Índices para tablas volcadas
@@ -102,6 +141,12 @@ ALTER TABLE `propiedades`
   ADD KEY `metros_cuadrados` (`metros_cuadrados`);
 
 --
+-- Indices de la tabla `regresiones_lineales`
+--
+ALTER TABLE `regresiones_lineales`
+  ADD PRIMARY KEY (`id_regresion`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -115,13 +160,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `propiedades`
 --
 ALTER TABLE `propiedades`
-  MODIFY `id_propiedad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_propiedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `regresiones_lineales`
+--
+ALTER TABLE `regresiones_lineales`
+  MODIFY `id_regresion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -137,7 +188,7 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `propiedades`
 --
 ALTER TABLE `propiedades`
-  ADD CONSTRAINT `propiedad-direccion` FOREIGN KEY (`id_direccion`) REFERENCES `direcciones` (`id_direccion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `propiedad-direccion` FOREIGN KEY (`id_direccion`) REFERENCES `direcciones` (`id_direccion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `propiedad-usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
