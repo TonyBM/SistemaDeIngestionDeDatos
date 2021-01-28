@@ -1,5 +1,6 @@
 package mx.uady.ingestionDeDatos.rest;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import javax.json.JsonObject;
 
 import java.util.Collections;
+import javax.servlet.ServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,7 +74,7 @@ public class PropiedadRest {
     }
 
     @PostMapping("/propiedades")
-    public ResponseEntity<Propiedad> postPropiedad(@RequestBody @Valid PropiedadRequest request) throws URISyntaxException {
+    public ResponseEntity<Propiedad> postPropiedad(@RequestBody @Valid PropiedadRequest request) throws URISyntaxException, UnsupportedEncodingException {
         Direccion direccion = direccionService.crearDireccion(request.getDireccion());
         Propiedad propiedad = propiedadService.crearPropiedad(request,direccion.getIdDireccion());
         return ResponseEntity

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
+import org.springframework.stereotype.Component;
 
 public class DecodedToken {
 

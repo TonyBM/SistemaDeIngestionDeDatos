@@ -1,5 +1,6 @@
 package mx.uady.ingestionDeDatos.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -13,6 +14,8 @@ import java.util.StringTokenizer;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import mx.uady.ingestionDeDatos.config.DecodedToken;
 
@@ -36,6 +39,9 @@ import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
 import mx.uady.ingestionDeDatos.repository.DireccionRepository;
 import mx.uady.ingestionDeDatos.repository.PagedPropiedadRepository;
 import mx.uady.ingestionDeDatos.repository.PropiedadRepository;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class PropiedadService {
@@ -47,6 +53,9 @@ public class PropiedadService {
     
     @Autowired
     private PropiedadRepository propiedadRepository;
+    
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     private final Integer PAGE_SIZE = 5;
 
@@ -136,7 +145,7 @@ public class PropiedadService {
     }
 
     @Transactional
-    public Propiedad crearPropiedad(PropiedadRequest request, Integer idDireccion) {
+    public Propiedad crearPropiedad(PropiedadRequest request, Integer idDireccion) throws UnsupportedEncodingException {
 
         Propiedad propiedadCreada = new Propiedad();
 
@@ -147,7 +156,7 @@ public class PropiedadService {
         propiedadCreada.setIdDireccion(idDireccion);
         propiedadCreada.setFechaPublicacion(new Date());
         propiedadCreada.setNumHabitaciones(request.getNumHabitaciones());
-        propiedadCreada.setIdUsuario(request.getIdUsuario());
+        propiedadCreada.setIdUsuario(getUsuarioLoggeado().getId());
         propiedadCreada.setMetrosCuadrados(request.getMetrosCuadrados());
         propiedadCreada.setFecha_creacion(new Date());
         
@@ -169,6 +178,18 @@ public class PropiedadService {
         
         return direccionGuardada;
     }
+    
+    private Usuario getUsuarioLoggeado() throws UnsupportedEncodingException {
+        
+        HttpServletRequest httpRequest = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        String authHeader = httpRequest.getHeader(HttpHeaders.AUTHORIZATION); 
+        DecodedToken token = DecodedToken.getDecoded(authHeader);
+        
+        Usuario usuario = usuarioRepository.findByUsuario(token.sub);
+        
+        return usuario;
+    }
+    
     @Transactional
     public Propiedad editarPropiedad(Integer idPropiedad, PropiedadRequest request){
         return pagedPropiedadRepository.findById(idPropiedad)

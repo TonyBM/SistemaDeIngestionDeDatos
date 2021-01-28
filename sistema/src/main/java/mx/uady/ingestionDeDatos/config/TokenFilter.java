@@ -25,7 +25,7 @@ import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 public class TokenFilter extends GenericFilterBean {
 
     private Logger log = LoggerFactory.getLogger(TokenFilter.class);
-
+    
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -44,9 +44,11 @@ public class TokenFilter extends GenericFilterBean {
             return;
         }
 
-        log.info("Header de auth: [{}]", authHeader);
+        log.info("JWT: [{}]", authHeader);
+        
+        DecodedToken token = DecodedToken.getDecoded(authHeader);
 
-        Usuario usuario = usuarioRepository.findBySecret(authHeader);
+        Usuario usuario = usuarioRepository.findByUsuario(token.sub);
 
         log.info("Usuario: [{}]", usuario);
 

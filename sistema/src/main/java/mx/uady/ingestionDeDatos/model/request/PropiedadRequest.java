@@ -49,7 +49,6 @@ public class PropiedadRequest {
     @Setter
     private Integer numHabitaciones;
     
-    @NotNull
     @Getter
     @Setter
     private Integer idUsuario;
