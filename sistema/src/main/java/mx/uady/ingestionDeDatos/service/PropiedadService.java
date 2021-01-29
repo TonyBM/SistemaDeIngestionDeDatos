@@ -129,7 +129,7 @@ public class PropiedadService {
 
                 propiedadAux.setFechaPublicacion(new Date());
                 propiedadAux.setNumHabitaciones(Integer.parseInt(atributos.nextToken()));
-                propiedadAux.setIdUsuario(Integer.parseInt(atributos.nextToken()));
+                propiedadAux.setIdUsuario(getUsuarioLoggeado().getId());
                 propiedadAux.setMetrosCuadrados(Float.parseFloat(atributos.nextToken()));
                 propiedadAux.setFecha_creacion(new Date());
                 listaPropiedades.add(propiedadAux);
