@@ -88,10 +88,10 @@ INSERT INTO `propiedades` (`id_propiedad`, `nombre`, `precio`, `banos`, `ubicaci
 
 CREATE TABLE `regresiones_lineales` (
   `id_regresion` int(11) NOT NULL,
-  `q1` varchar(20) NOT NULL,
-  `q2` varchar(20) NOT NULL,
-  `q3` varchar(20) NOT NULL,
-  `intercepto` varchar(20) NOT NULL,
+  `q1` double NOT NULL,
+  `q2` double NOT NULL,
+  `q3` double NOT NULL,
+  `intercepto` double NOT NULL,
   `fecha_regresion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
