@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.Enumerated;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +41,8 @@ public class Propiedad {
     @Column(name = "ubicacion")
     @Getter
     @Setter
-    private String ubicacion;
+    @Enumerated(EnumType.STRING)
+    private Licenciatura licenciatura;
 
     @Column(name = "id_direccion")
     @Getter
