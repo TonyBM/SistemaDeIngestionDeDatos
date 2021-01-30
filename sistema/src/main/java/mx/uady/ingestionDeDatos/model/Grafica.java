@@ -4,7 +4,7 @@ package mx.uady.ingestionDeDatos.model;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Grafica<T> {
+public class Grafica<T, V> {
 
     @Getter
     @Setter
@@ -12,9 +12,9 @@ public class Grafica<T> {
 
     @Getter
     @Setter
-    private Integer[] YAxisValues;
+    private V[] YAxisValues;
 
-    public Grafica(T[] XAxisValues, Integer[] YAxisValues) {
+    public Grafica(T[] XAxisValues, V[] YAxisValues) {
         this.XAxisValues = XAxisValues;
         this.YAxisValues = YAxisValues;
     }

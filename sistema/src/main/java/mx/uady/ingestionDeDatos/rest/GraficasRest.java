@@ -38,7 +38,12 @@ public class GraficasRest {
     GraficasService graficasService;
 
     @GetMapping("/ubicacion/casas")
-    public ResponseEntity<Grafica> obtenerPropiedad() {
-        return ResponseEntity.ok(graficasService.obtenerPropiedadesPorCasa());
+    public ResponseEntity<Grafica> obtenerGraficaCasas() {
+        return ResponseEntity.ok(graficasService.obtenerPropiedadesPorUbicacion());
+    }
+
+    @GetMapping("/ubicacion/precio")
+    public ResponseEntity<Grafica> obtenerGraficaPrecios() {
+        return ResponseEntity.ok(graficasService.obtenerPrecioPorUbicaciones());
     }
 }

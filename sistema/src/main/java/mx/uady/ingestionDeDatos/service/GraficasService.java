@@ -16,7 +16,7 @@ public class GraficasService {
     private PropiedadRepository PropiedadRepository;
 
     @Transactional
-    public Grafica obtenerPropiedadesPorCasa() {
+    public Grafica obtenerPropiedadesPorUbicacion() {
         Ubicacion[] ubicaciones = Ubicacion.values();
         Integer[] values = new Integer[ubicaciones.length];
         Ubicacion[] keys = new Ubicacion[ubicaciones.length];
@@ -29,7 +29,24 @@ public class GraficasService {
             index++;
         }
 
-        return new Grafica<Ubicacion>(keys, values);
+        return new Grafica<Ubicacion, Integer>(keys, values);
+    }
+
+    @Transactional
+    public Grafica obtenerPrecioPorUbicaciones() {
+        Ubicacion[] ubicaciones = Ubicacion.values();
+        Double[] precios = new Double[ubicaciones.length];
+        Ubicacion[] keys = new Ubicacion[ubicaciones.length];
+        Integer index = 0;
+
+        for (Ubicacion ubicacion : ubicaciones) {
+
+            precios[index] = PropiedadRepository.promedioPorUbicacion(ubicacion.name());
+            keys[index] = ubicacion;
+            index++;
+        }
+
+        return new Grafica<Ubicacion, Double>(keys, precios);
     }
 
 }
