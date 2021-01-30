@@ -12,6 +12,7 @@ import java.util.Base64;
 import java.util.Optional;
 import java.util.StringTokenizer;
 
+import  mx.uady.ingestionDeDatos.model.Ubicacion;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.servlet.ServletRequest;
@@ -118,7 +119,7 @@ public class PropiedadService {
                 propiedadAux.setNombre(atributos.nextToken());
                 propiedadAux.setPrecio(Float.parseFloat(atributos.nextToken()));
                 propiedadAux.setBanos(Integer.parseInt(atributos.nextToken()));
-                propiedadAux.setUbicacion(atributos.nextToken());
+                propiedadAux.setUbicacion(Ubicacion.valueOf(atributos.nextToken()));
                     
                 direccionAux.setCalle(atributos.nextToken());
                 direccionAux.setNumero(atributos.nextToken());
@@ -152,7 +153,7 @@ public class PropiedadService {
         propiedadCreada.setNombre(request.getNombre());
         propiedadCreada.setPrecio(request.getPrecio());
         propiedadCreada.setBanos(request.getBanos());
-        propiedadCreada.setUbicacion(request.getUbicacion());
+        propiedadCreada.setUbicacion(Ubicacion.valueOf(request.getUbicacion()));
         propiedadCreada.setIdDireccion(idDireccion);
         propiedadCreada.setFechaPublicacion(new Date());
         propiedadCreada.setNumHabitaciones(request.getNumHabitaciones());
@@ -197,7 +198,7 @@ public class PropiedadService {
             propiedad.setNombre(request.getNombre());
             propiedad.setPrecio(request.getPrecio());
             propiedad.setBanos(request.getBanos());
-            propiedad.setUbicacion(request.getUbicacion());
+            propiedad.setUbicacion(Ubicacion.valueOf(request.getUbicacion()));
             propiedad.setFechaPublicacion(request.getFechaPublicacion());
             propiedad.setNumHabitaciones(request.getNumHabitaciones());
             propiedad.setMetrosCuadrados(request.getMetrosCuadrados());
