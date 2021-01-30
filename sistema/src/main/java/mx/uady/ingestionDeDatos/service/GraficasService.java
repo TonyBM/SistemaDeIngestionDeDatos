@@ -49,4 +49,20 @@ public class GraficasService {
         return new Grafica<Ubicacion, Double>(keys, precios);
     }
 
+    @Transactional
+    public Grafica obtenerPrecioPorMetrosCuadrados() {
+        Double[] metros = PropiedadRepository.findAllDistinctMetrosCuadrados();
+        Double[] precios = new Double[metros.length];
+        Double[] keys = new Double[metros.length];
+        Integer index = 0;
+
+        for (Double metro : metros) {
+            precios[index] = PropiedadRepository.promedioPorMetrosCuadrados(metro);
+            keys[index] = metro;
+            index++;
+        }
+
+        return new Grafica<Double, Double>(keys, precios);
+    }
+
 }

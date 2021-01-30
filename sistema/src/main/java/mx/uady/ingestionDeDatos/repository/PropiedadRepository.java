@@ -15,4 +15,10 @@ public interface PropiedadRepository extends JpaRepository<Propiedad,Integer> {
 
         @Query(value = "SELECT IFNULL(AVG(precio), 0) as promedio FROM propiedades WHERE ubicacion = ?1", nativeQuery = true)
         public Double promedioPorUbicacion(String ubicacion);
+
+        @Query(value = "SELECT DISTINCT metros_cuadrados FROM propiedades", nativeQuery = true)
+        public Double[] findAllDistinctMetrosCuadrados();
+
+        @Query(value = "SELECT IFNULL(AVG(precio), 0) as promedio FROM propiedades WHERE metros_cuadrados = ?1", nativeQuery = true)
+        public Double promedioPorMetrosCuadrados(Double metros);
 }

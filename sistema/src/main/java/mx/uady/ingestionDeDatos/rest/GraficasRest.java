@@ -46,4 +46,9 @@ public class GraficasRest {
     public ResponseEntity<Grafica> obtenerGraficaPrecios() {
         return ResponseEntity.ok(graficasService.obtenerPrecioPorUbicaciones());
     }
+
+    @GetMapping("/metros/precio")
+    public ResponseEntity<Grafica> obtenerGraficaMetros() {
+        return ResponseEntity.ok(graficasService.obtenerPrecioPorMetrosCuadrados());
+    }
 }
