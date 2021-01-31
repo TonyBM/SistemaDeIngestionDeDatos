@@ -13,6 +13,12 @@ import javax.json.JsonObject;
 import java.util.Collections;
 import javax.servlet.ServletRequest;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.script.ScriptException;
+import java.lang.InterruptedException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +67,16 @@ public class PropiedadRest {
     public ResponseEntity<Optional<Propiedad>> getPropiedadById(@PathVariable Integer id) {
         Optional<Propiedad> propiedad = propiedadService.getPropiedadById(id);
         return ResponseEntity.status(HttpStatus.OK).body(propiedad);
+    }
+
+    @GetMapping("/prediccionCostoPropiedad/{id}")
+    public ResponseEntity prediccionPropiedad(@PathVariable Integer id) throws InterruptedException, IOException, URISyntaxException, ScriptException {
+
+        String response = propiedadService.prediccionPropiedad(id);
+
+        return ResponseEntity
+            .ok()
+            .body(Collections.singletonMap("Respuesta", response));
     }
 
     @DeleteMapping("/propiedad/{id}")

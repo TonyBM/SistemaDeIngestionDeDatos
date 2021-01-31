@@ -22,6 +22,14 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>bedatadriven</id>
+			<name>bedatadriven public repo</name>
+			<url>https://nexus.bedatadriven.com/content/groups/public/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
             <groupId>org.springframework.boot</groupId>
@@ -80,6 +88,12 @@
 		<artifactId>tomcat-embed-core</artifactId>
 		<version>9.0.38</version>
 		<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.renjin</groupId>
+			<artifactId>renjin-script-engine</artifactId>
+			<version>RELEASE</version>
 		</dependency>
 
 	<!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->

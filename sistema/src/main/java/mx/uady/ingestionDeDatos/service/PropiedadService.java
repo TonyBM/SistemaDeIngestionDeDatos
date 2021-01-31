@@ -1,5 +1,8 @@
 package mx.uady.ingestionDeDatos.service;
 
+import java.lang.*;
+import java.io.*;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,6 +23,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import mx.uady.ingestionDeDatos.config.DecodedToken;
 
+import org.renjin.script.RenjinScriptEngine;
+import org.renjin.sexp.*;
+import org.renjin.primitives.matrix.*;
+
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.stream.*;
+import java.util.Optional;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
+import javax.script.ScriptException;
+import java.lang.InterruptedException;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +62,8 @@ import mx.uady.ingestionDeDatos.config.JwtTokenUtil;
 import mx.uady.ingestionDeDatos.model.Propiedad;
 import mx.uady.ingestionDeDatos.model.Direccion;
 import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
+import mx.uady.ingestionDeDatos.model.Regresion;
+import mx.uady.ingestionDeDatos.repository.RegresionRepository;
 import mx.uady.ingestionDeDatos.repository.DireccionRepository;
 import mx.uady.ingestionDeDatos.repository.PagedPropiedadRepository;
 import mx.uady.ingestionDeDatos.repository.PropiedadRepository;
@@ -54,6 +81,9 @@ public class PropiedadService {
     
     @Autowired
     private PropiedadRepository propiedadRepository;
+
+    @Autowired 
+	private RegresionRepository regresionRepository;
     
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -86,6 +116,56 @@ public class PropiedadService {
             default:
                 return new ArrayList<Propiedad>();
         }
+    }
+
+    public String prediccionPropiedad(Integer id) throws InterruptedException, IOException, URISyntaxException, ScriptException {
+
+        Optional<Propiedad> opt = pagedPropiedadRepository.findById(id);
+        Optional<Regresion> optR = regresionRepository.findById(1);
+
+        if(!opt.isPresent()){
+            throw new NotFoundException("La propiedad no pudo ser encontrada.");
+        }
+        if(!optR.isPresent()){
+            throw new NotFoundException("La regresion no pudo ser encontrada.");
+        }
+
+        Propiedad propiedad = opt.get();
+        Regresion regresion = optR.get();
+        List<Double> regresionVals = new ArrayList<Double>();
+        List<Double> propiedadVals = new ArrayList<Double>();
+
+        regresionVals.add( regresion.getIntercepto() );
+		regresionVals.add( regresion.getQ1() );
+        regresionVals.add( regresion.getQ2() );
+        regresionVals.add( regresion.getQ3() );
+        
+        propiedadVals.add( Double.valueOf(propiedad.getBanos()) );
+		propiedadVals.add( Double.valueOf(propiedad.getNumHabitaciones()) );
+        propiedadVals.add( Double.valueOf(propiedad.getMetrosCuadrados()) );
+
+        Double[] regresion_ar = new Double[regresionVals.size()];
+		Double[] propiedad_ar = new Double[propiedadVals.size()];
+		regresion_ar = regresionVals.toArray(regresion_ar);
+		propiedad_ar = propiedadVals.toArray(propiedad_ar);
+        
+        RenjinScriptEngine engine = new RenjinScriptEngine();
+		InputStream i = PropiedadService.class.getClassLoader().getResourceAsStream("regresion-lineal.R");
+		BufferedReader r = new BufferedReader(new InputStreamReader(i));
+		String val = "";
+        String l;
+        while((l = r.readLine()) != null) {
+        	val = val + l + "\n";
+        } 
+		i.close();
+        String meanScriptContent = val;
+        engine.put("regresion_values", regresion_ar);
+		engine.put("new_values", propiedad_ar);
+		engine.eval(meanScriptContent);
+		Double result = (Double)engine.eval("predecir_precio(regresion_values,new_values)");
+
+        return "La prediccion de precio de la propiedad "+id+" es "+result;
+
     }
 
     public String borrarPropiedad(Integer id) {
