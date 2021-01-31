@@ -57,6 +57,7 @@ import static org.apache.commons.codec.digest.HmacUtils.hmacSha256;
 import mx.uady.ingestionDeDatos.exception.NotFoundException;
 import mx.uady.ingestionDeDatos.model.Usuario;
 import mx.uady.ingestionDeDatos.model.request.UsuarioRequest;
+import mx.uady.ingestionDeDatos.model.request.PrediccionRequest;
 import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 import mx.uady.ingestionDeDatos.config.JwtTokenUtil;
 import mx.uady.ingestionDeDatos.model.Propiedad;
@@ -118,19 +119,26 @@ public class PropiedadService {
         }
     }
 
-    public String prediccionPropiedad(Integer id) throws InterruptedException, IOException, URISyntaxException, ScriptException {
-
-        Optional<Propiedad> opt = pagedPropiedadRepository.findById(id);
-        Optional<Regresion> optR = regresionRepository.findById(1);
-
-        if(!opt.isPresent()){
+    public String getPrediccionById(Integer id) throws InterruptedException, IOException, URISyntaxException, ScriptException{
+        Optional<Propiedad> optP = pagedPropiedadRepository.findById(id);
+        if(!optP.isPresent()){
             throw new NotFoundException("La propiedad no pudo ser encontrada.");
         }
+        Propiedad propiedad = optP.get();
+        return prediccionPropiedad(propiedad.getBanos(), propiedad.getNumHabitaciones(), propiedad.getMetrosCuadrados());
+    }
+
+    public String getPrediccionByRequest(PrediccionRequest request) throws InterruptedException, IOException, URISyntaxException, ScriptException{
+        return prediccionPropiedad(request.getBanos(), request.getNumHabitaciones(), request.getMetrosCuadrados());
+    }
+
+    private String prediccionPropiedad(Integer banos, Integer habitaciones, Float metros) throws InterruptedException, IOException, URISyntaxException, ScriptException {
+        Optional<Regresion> optR = regresionRepository.findById(1);
+
         if(!optR.isPresent()){
             throw new NotFoundException("La regresion no pudo ser encontrada.");
         }
 
-        Propiedad propiedad = opt.get();
         Regresion regresion = optR.get();
         List<Double> regresionVals = new ArrayList<Double>();
         List<Double> propiedadVals = new ArrayList<Double>();
@@ -140,9 +148,9 @@ public class PropiedadService {
         regresionVals.add( regresion.getQ2() );
         regresionVals.add( regresion.getQ3() );
         
-        propiedadVals.add( Double.valueOf(propiedad.getBanos()) );
-		propiedadVals.add( Double.valueOf(propiedad.getNumHabitaciones()) );
-        propiedadVals.add( Double.valueOf(propiedad.getMetrosCuadrados()) );
+        propiedadVals.add( Double.valueOf(banos));
+		propiedadVals.add( Double.valueOf(habitaciones));
+        propiedadVals.add( Double.valueOf(metros));
 
         Double[] regresion_ar = new Double[regresionVals.size()];
 		Double[] propiedad_ar = new Double[propiedadVals.size()];
@@ -162,10 +170,9 @@ public class PropiedadService {
         engine.put("regresion_values", regresion_ar);
 		engine.put("new_values", propiedad_ar);
 		engine.eval(meanScriptContent);
-		Double result = (Double)engine.eval("predecir_precio(regresion_values,new_values)");
-
-        return "La prediccion de precio de la propiedad "+id+" es "+result;
-
+		Vector result = (Vector)engine.eval("predecir_precio(regresion_values,new_values)");
+        Double value = result.getElementAsDouble(0);
+        return "La prediccion de precio de la propiedad es "+value;
     }
 
     public String borrarPropiedad(Integer id) {

@@ -39,6 +39,7 @@ import mx.uady.ingestionDeDatos.service.PropiedadService;
 import mx.uady.ingestionDeDatos.model.Direccion;
 import mx.uady.ingestionDeDatos.model.request.PropiedadRequest;
 import mx.uady.ingestionDeDatos.service.DireccionService;
+import mx.uady.ingestionDeDatos.model.request.PrediccionRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -72,7 +73,17 @@ public class PropiedadRest {
     @GetMapping("/prediccionCostoPropiedad/{id}")
     public ResponseEntity prediccionPropiedad(@PathVariable Integer id) throws InterruptedException, IOException, URISyntaxException, ScriptException {
 
-        String response = propiedadService.prediccionPropiedad(id);
+        String response = propiedadService.getPrediccionById(id);
+
+        return ResponseEntity
+            .ok()
+            .body(Collections.singletonMap("Respuesta", response));
+    }
+
+    @PostMapping("/prediccionCostoPropiedad")
+    public ResponseEntity postPrediccionPropiedad(@RequestBody @Valid PrediccionRequest request) throws InterruptedException, IOException, URISyntaxException, ScriptException {
+
+        String response = propiedadService.getPrediccionByRequest(request);
 
         return ResponseEntity
             .ok()
