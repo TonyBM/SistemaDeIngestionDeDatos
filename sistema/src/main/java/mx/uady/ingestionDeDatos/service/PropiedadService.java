@@ -15,7 +15,6 @@ import java.util.Base64;
 import java.util.Optional;
 import java.util.StringTokenizer;
 
-import  mx.uady.ingestionDeDatos.model.Ubicacion;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.servlet.ServletRequest;
@@ -58,6 +57,7 @@ import mx.uady.ingestionDeDatos.exception.NotFoundException;
 import mx.uady.ingestionDeDatos.model.Usuario;
 import mx.uady.ingestionDeDatos.model.request.UsuarioRequest;
 import mx.uady.ingestionDeDatos.model.request.PrediccionRequest;
+import mx.uady.ingestionDeDatos.model.Ubicacion;
 import mx.uady.ingestionDeDatos.repository.UsuarioRepository;
 import mx.uady.ingestionDeDatos.config.JwtTokenUtil;
 import mx.uady.ingestionDeDatos.model.Propiedad;
@@ -109,7 +109,7 @@ public class PropiedadService {
             case "baños":
                 return pagedPropiedadRepository.findByBanos(Integer.parseInt(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "ubicacion":
-                return pagedPropiedadRepository.findByUbicacion(value, PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
+                return pagedPropiedadRepository.findByUbicacion(Ubicacion.valueOf(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "habitaciones":
                 return pagedPropiedadRepository.findByNumHabitaciones(Integer.parseInt(value), PageRequest.of(page, PAGE_SIZE, Sort.by("idPropiedad")));
             case "area":
@@ -286,10 +286,10 @@ public class PropiedadService {
             propiedad.setPrecio(request.getPrecio());
             propiedad.setBanos(request.getBanos());
             propiedad.setUbicacion(Ubicacion.valueOf(request.getUbicacion()));
-            propiedad.setFechaPublicacion(request.getFechaPublicacion());
+            propiedad.setFechaPublicacion(new Date());
             propiedad.setNumHabitaciones(request.getNumHabitaciones());
             propiedad.setMetrosCuadrados(request.getMetrosCuadrados());
-            propiedad.setFecha_creacion(request.getFechaCreacion());
+            propiedad.setFecha_creacion(new Date());
             return pagedPropiedadRepository.save(propiedad);
         })
         .orElseThrow(() -> new NotFoundException("La entidad propiedad no pudo ser encontrada."));

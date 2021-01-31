@@ -4,5 +4,6 @@ public enum Ubicacion {
     NORTE,
     SUR,
     ESTE,
-    OESTE
+    OESTE,
+    CENTRO
 }

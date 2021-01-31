@@ -6,13 +6,14 @@ import org.springframework.stereotype.Repository;
 import mx.uady.ingestionDeDatos.model.Propiedad;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.domain.Pageable;
+import mx.uady.ingestionDeDatos.model.Ubicacion;
 
 @Repository
 public interface PagedPropiedadRepository extends PagingAndSortingRepository<Propiedad, Integer> {
     public List<Propiedad> findByNombre(String name, Pageable pageable);
     public List<Propiedad> findByBanos(Integer banos, Pageable pageable);
     public List<Propiedad> findByPrecio(Float precio, Pageable pageable);
-    public List<Propiedad> findByUbicacion(String ubicacion, Pageable pageable);
+    public List<Propiedad> findByUbicacion(Ubicacion ubicacion, Pageable pageable);
     public List<Propiedad> findByNumHabitaciones(Integer numHabitaciones, Pageable pageable);
     public List<Propiedad> findByMetrosCuadrados(Float metrosCuadrados, Pageable pageable);    
 }
