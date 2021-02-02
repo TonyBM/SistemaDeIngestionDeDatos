@@ -53,12 +53,17 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 <a name="api"></a>
 ## Documentación de la API
 ### Endpoints
-* [Listar propiedades](#listarPropiedades) : `GET /api/propiedades?{parametros_opcionales}`
+* [Listar propiedades](#listarPropiedades) : `GET /api/propiedades/{page}`
+* [Listar propiedades con filtro](#listarPropiedades) : `POST /api/propiedades/{page}`
 * [Listar propiedad especifica](#listarEspecifica) : `GET /api/propiedades/{id}`
 * [Crear propiedad](#crearPropiedad) : `POST /api/propiedades/`
-* [Crear propiedades desde csv](#crearCSV) : `POST /api/propiedades/csv`
+* [Crear propiedades desde csv](#crearCSV) : `POST /api/propiedades/carga_masiva`
 * [Actualizar propiedad](#actualizarPropiedad) : `PUT /api/propiedades/{id}`
 * [Eliminar propiedad](#eliminarPropiedad) : `DELETE /api/propiedades/{id}`
+* Grafica de Precios por Ubicacion : `GET /api/graficas/ubicacion/precio`
+* Grafica de cantidad de Propiedades por Ubicacion : `GET /api/graficas/ubicacion/casas`
+* Grafica de Precios por Metros Cuadrados : `GET /api/graficas/metros/precio`
+* [Predicción de Precio de propiedad](#prediccion) : `POST /api/prediccionCostoPropiedad`
 
 #### <a name="listarPropiedades"></a> Listar propiedades
 * URI :
@@ -174,16 +179,16 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 
 #### <a name="listarPaginadas"></a> Listar propiedades paginadas
 * URI :
-  * `GET /api/propiedades/{offsetValue}/{cantidad}`
+  * `GET /api/propiedades/{page}`
 * Descripción:
   * Se utiliza para solicitar una búsqueda con la capacidad de paginar las listarPropiedades
   en conjunto con la información de estas registradas en el sistema.
-* Ejemplo de request: `GET /api/propiedades/5/20`
-  * Descripción: La respuesta son un total de 20 propiedades comenzando desde la propiedad con el id 5, por lo que se devolverá el listado de las propiedades de la 5 a la 25.
+* Ejemplo de request: `GET /api/propiedades/1`
+  * Descripción: La respuesta son un total de 5 propiedades comenzando desde la propiedad con el id 6, por lo que se devolverá el listado de las propiedades de la 6 a la 10.
   * Respuesta (200OK):
 ```json    
     {
-      "5": {
+      "6": {
         "costo" : 1000000.00,
         "ubicacion" : "Oriente",
         "direccion" : {
@@ -203,7 +208,7 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 
       ...      
 
-      "25": {
+      "10": {
         "costo" : 3500140.00,
         "ubicacion" : "Norte",
         "direccion" : {
@@ -316,7 +321,7 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 
 #### <a name="crearCSV"></a> Crear propiedades desde CSV
 * URI :
-  * `POST /api/propiedades/csv`
+  * `POST /api/propiedades/carga_masiva`
 * Descripción:
   * Se utiliza para realizar el registro de propiedades dentro del sistema por medio de un archivo csv.
 * Campos requeridos en cada entrada del csv:
@@ -424,6 +429,11 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
       }
     }
 ```
+  * Ejemplo de CSV
+  ```CSV
+  CASA 3 habitaciones en el norte,1000000,4,NORTE,14,12,5 y 5a,tepito,97130,3,200
+CASA 2 habitaciones en el norte,800000,3,NORTE,11,15,12 y 13,fco de montejo,97000,2,150
+  ```
 
 #### <a name="actualizarPropiedad"></a> Actualizar propiedad
 * URI :
@@ -536,6 +546,26 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
     "respuesta": "La propiedad 1 ha sido eliminada"
   }
 ```  
+
+#### <a name="prediccion"></a> Predicción de precio de propiedad
+* URI :
+  * `POST /api/prediccionCostoPropiedad`
+* Descripción:
+  * Se utiliza para obtener una predicción del costo de una propiedad en base a sus habitaciones, cantidad de baños y metros cuadrados de la propiedad. Utilizando un script de R con una formula de regresión lineal.
+* Respuesta (200OK):    
+```json    
+  {
+    "respuesta": "El precio de la propiedad es de {precio}"
+  }
+```       
+* Ejemplo de request: `POST /api/prediccionCostoPropiedad`
+```json
+    {
+      "habitaciones": 4,
+      "banos": 2,
+      "metros_cuadrados": 100
+    }
+```
 
 <a name="calidad"></a>
 ## Criterios de Calidad de la API
