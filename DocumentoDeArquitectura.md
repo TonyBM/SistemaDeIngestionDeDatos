@@ -124,7 +124,7 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
     }
   }         
 ```
-#### <a name="listarPropiedadesConFiltro"></a> Listar propiedades
+#### <a name="listarPropiedadesConFiltro"></a> Listar propiedades con filtro
 * URI :
   * `POST /api/propiedades?{parametros_opcionales}`
 * Descripción:
