@@ -54,7 +54,7 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 ## Documentación de la API
 ### Endpoints
 * [Listar propiedades](#listarPropiedades) : `GET /api/propiedades/{page}`
-* [Listar propiedades con filtro](#) : `POST /api/findPropiedad/{page}`
+* [Listar propiedades con filtro](#listarPropiedadesConFiltro) : `POST /api/findPropiedad/{page}`
 * [Listar propiedad especifica](#listarEspecifica) : `GET /api/propiedades/{id}`
 * [Crear propiedad](#crearPropiedad) : `POST /api/propiedades/`
 * [Crear propiedades desde csv](#crearCSV) : `POST /api/propiedades/carga_masiva`
@@ -124,7 +124,60 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
     }
   }         
 ```
-
+#### <a name="listarPropiedadesConFiltro"></a> Listar propiedades
+* URI :
+  * `POST /api/propiedades?{parametros_opcionales}`
+* Descripción:
+  * Se utiliza para obtener el listado de las propiedades registradas en el sistema que cumplan con algun parametro especifico
+  junto con su información correspondiente.
+* Ejemplo de solicitud:
+  * `POST /api/findPropiedad
+* Campos requeridos:
+  ```
+    {
+      "type": String,
+	    "value": String
+    }
+  ```
+* Respuesta (200OK):
+```json    
+  {
+    "1": {
+      "costo" : 1000000.00,
+      "ubicacion" : "Oriente",
+      "direccion" : {
+        "idDireccion" : 1,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "México Oriente"
+      },
+      "metros" : 56,
+      "banos" : 2.5,
+      "habitaciones" : 3,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    },
+    "2": {
+      "costo" : 3500140.00,
+      "ubicacion" : "Norte",
+      "direccion" : {
+        "idDireccion" : 2,
+        "calle" : "48",
+        "numero" : "478",
+        "cruzamientos" : "53 y 56",
+        "colonia" : "Francisco de Montejo"
+      },
+      "metros" : 100,
+      "banos" : 4,
+      "habitaciones" : 4,
+      "fechaPublicacion" : "2009-03-02 23:13:36",
+      "fechaCreacion" : "2009-03-02 23:13:36",
+      "idusuario" : 3
+    }
+  }         
+```
 #### <a name="listarEspecifica"></a> Listar propiedad especifica
 * URI :
   * `GET /api/propiedades/{id}`
