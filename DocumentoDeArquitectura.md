@@ -67,66 +67,112 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 
 #### <a name="listarPropiedades"></a> Listar propiedades
 * URI :
-  * `GET /api/propiedades?{parametros_opcionales}`
+  * `GET /api/propiedades`
 * Descripción:
   * Se utiliza para obtener el listado de las propiedades registradas en el sistema
   junto con su información correspondiente.
-* Parametros opcionales
-  * cantidad : Integer - Cantidad de elementos a obtener
-  * offset : Integer - Indice donde comenzará el listado de propiedades
-  * costoMenor : float - Cantidad para buscar propiedades con costo menor que el indicado en este parametro
-  * costoMayor : float - Cantidad para buscar propiedades con costo mayor que el indicado en este parametro
-  * ubicacion : String (Norte, Sur, Este, Oeste, Centro) - Valor para buscar por ubicación de la propiedad
-  * colonia : String - Valor de búsqueda por colonia
-  * metrosMenor : float - Cantidad para buscar propiedades con metros cuadrados menor que el indicado en este parámetro
-  * metrosMayor : float - Cantidad para buscar propiedades con metros cuadrados mayor que el indicado en este parámetro
-  * banos : integer - Cantidad de baños deseados en la propiedad
-  * habitaciones : integer - Cantidad de habitaciones deseadas en la propiedad
-  * fechaPublicacion : String (Y-m-d H:i:s) - Fecha de publicación de la propiedad
 * Ejemplo de solicitud:
-  * `GET /api/propiedades?cantidad=1&metros=56`
+  * `GET /api/propiedades`
 * Respuesta (200OK):
 ```json    
   {
-    "1": {
-      "costo" : 1000000.00,
-      "ubicacion" : "Oriente",
-      "direccion" : {
-        "idDireccion" : 1,
-        "calle" : "48",
-        "numero" : "478",
-        "cruzamientos" : "53 y 56",
-        "colonia" : "México Oriente"
-      },
-      "metros" : 56,
-      "banos" : 2.5,
-      "habitaciones" : 3,
-      "fechaPublicacion" : "2009-03-02 23:13:36",
-      "fechaCreacion" : "2009-03-02 23:13:36",
-      "idusuario" : 3
+  "content": [
+    {
+      "idPropiedad": 17,
+      "nombre": "CASA 4 habitaciones en el sur",
+      "precio": 700000.0,
+      "banos": 5,
+      "ubicacion": "SUR",
+      "idDireccion": 18,
+      "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+      "numHabitaciones": 4,
+      "idUsuario": 2,
+      "metrosCuadrados": 400.0,
+      "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
     },
-    "2": {
-      "costo" : 3500140.00,
-      "ubicacion" : "Norte",
-      "direccion" : {
-        "idDireccion" : 2,
-        "calle" : "48",
-        "numero" : "478",
-        "cruzamientos" : "53 y 56",
-        "colonia" : "Francisco de Montejo"
-      },
-      "metros" : 100,
-      "banos" : 4,
-      "habitaciones" : 4,
-      "fechaPublicacion" : "2009-03-02 23:13:36",
-      "fechaCreacion" : "2009-03-02 23:13:36",
-      "idusuario" : 3
+    {
+      "idPropiedad": 18,
+      "nombre": "CASA 5 habitaciones en el sur",
+      "precio": 900000.0,
+      "banos": 7,
+      "ubicacion": "SUR",
+      "idDireccion": 19,
+      "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+      "numHabitaciones": 5,
+      "idUsuario": 2,
+      "metrosCuadrados": 500.0,
+      "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
+    },
+    {
+      "idPropiedad": 19,
+      "nombre": "CASA 1 habitacion en el este",
+      "precio": 1200000.0,
+      "banos": 1,
+      "ubicacion": "ESTE",
+      "idDireccion": 20,
+      "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+      "numHabitaciones": 1,
+      "idUsuario": 2,
+      "metrosCuadrados": 200.0,
+      "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
+    },
+    {
+      "idPropiedad": 20,
+      "nombre": "CASA 1 habitacion en el este",
+      "precio": 1000000.0,
+      "banos": 1,
+      "ubicacion": "ESTE",
+      "idDireccion": 21,
+      "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+      "numHabitaciones": 1,
+      "idUsuario": 2,
+      "metrosCuadrados": 150.0,
+      "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
+    },
+    {
+      "idPropiedad": 21,
+      "nombre": "CASA 2 habitaciones en el este",
+      "precio": 1500000.0,
+      "banos": 5,
+      "ubicacion": "ESTE",
+      "idDireccion": 22,
+      "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+      "numHabitaciones": 2,
+      "idUsuario": 2,
+      "metrosCuadrados": 300.0,
+      "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
     }
-  }         
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "pageNumber": 1,
+    "pageSize": 5,
+    "offset": 5,
+    "unpaged": false,
+    "paged": true
+  },
+  "totalPages": 3,
+  "totalElements": 15,
+  "last": false,
+  "first": false,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "numberOfElements": 5,
+  "size": 5,
+  "number": 1,
+  "empty": false
+}     
 ```
 #### <a name="listarPropiedadesConFiltro"></a> Listar propiedades con filtro
 * URI :
-  * `POST /api/findPropiedades?{parametros_opcionales}`
+  * `POST /api/findPropiedades?{pagina}`
 * Descripción:
   * Se utiliza para obtener el listado de las propiedades registradas en el sistema que cumplan con algun parametro especifico
   junto con su información correspondiente.
@@ -141,42 +187,60 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
   ```
 * Respuesta (200OK):
 ```json    
+  [
   {
-    "1": {
-      "costo" : 1000000.00,
-      "ubicacion" : "Oriente",
-      "direccion" : {
-        "idDireccion" : 1,
-        "calle" : "48",
-        "numero" : "478",
-        "cruzamientos" : "53 y 56",
-        "colonia" : "México Oriente"
-      },
-      "metros" : 56,
-      "banos" : 2.5,
-      "habitaciones" : 3,
-      "fechaPublicacion" : "2009-03-02 23:13:36",
-      "fechaCreacion" : "2009-03-02 23:13:36",
-      "idusuario" : 3
-    },
-    "2": {
-      "costo" : 3500140.00,
-      "ubicacion" : "Norte",
-      "direccion" : {
-        "idDireccion" : 2,
-        "calle" : "48",
-        "numero" : "478",
-        "cruzamientos" : "53 y 56",
-        "colonia" : "Francisco de Montejo"
-      },
-      "metros" : 100,
-      "banos" : 4,
-      "habitaciones" : 4,
-      "fechaPublicacion" : "2009-03-02 23:13:36",
-      "fechaCreacion" : "2009-03-02 23:13:36",
-      "idusuario" : 3
-    }
-  }         
+    "idPropiedad": 15,
+    "nombre": "CASA 2 habitaciones en el sur",
+    "precio": 500000.0,
+    "banos": 3,
+    "ubicacion": "SUR",
+    "idDireccion": 16,
+    "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+    "numHabitaciones": 2,
+    "idUsuario": 2,
+    "metrosCuadrados": 200.0,
+    "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
+  },
+  {
+    "idPropiedad": 16,
+    "nombre": "CASA 1 habitacion en el sur",
+    "precio": 300000.0,
+    "banos": 2,
+    "ubicacion": "SUR",
+    "idDireccion": 17,
+    "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+    "numHabitaciones": 1,
+    "idUsuario": 2,
+    "metrosCuadrados": 150.0,
+    "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
+  },
+  {
+    "idPropiedad": 17,
+    "nombre": "CASA 4 habitaciones en el sur",
+    "precio": 700000.0,
+    "banos": 5,
+    "ubicacion": "SUR",
+    "idDireccion": 18,
+    "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+    "numHabitaciones": 4,
+    "idUsuario": 2,
+    "metrosCuadrados": 400.0,
+    "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
+  },
+  {
+    "idPropiedad": 18,
+    "nombre": "CASA 5 habitaciones en el sur",
+    "precio": 900000.0,
+    "banos": 7,
+    "ubicacion": "SUR",
+    "idDireccion": 19,
+    "fechaPublicacion": "2021-01-31T20:59:56.000+00:00",
+    "numHabitaciones": 5,
+    "idUsuario": 2,
+    "metrosCuadrados": 500.0,
+    "fecha_creacion": "2021-01-31T20:59:56.000+00:00"
+  }
+] 
 ```
 #### <a name="listarEspecifica"></a> Listar propiedad especifica
 * URI :
