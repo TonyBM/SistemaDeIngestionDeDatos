@@ -67,12 +67,12 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 
 #### <a name="listarPropiedades"></a> Listar propiedades
 * URI :
-  * `GET /api/propiedades`
+  * `GET /api/propiedades/{pagina}`
 * Descripción:
   * Se utiliza para obtener el listado de las propiedades registradas en el sistema
   junto con su información correspondiente.
 * Ejemplo de solicitud:
-  * `GET /api/propiedades`
+  * `GET /api/propiedades/0`
 * Respuesta (200OK):
 ```json    
   {
