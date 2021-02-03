@@ -126,12 +126,12 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 ```
 #### <a name="listarPropiedadesConFiltro"></a> Listar propiedades con filtro
 * URI :
-  * `POST /api/propiedades?{parametros_opcionales}`
+  * `POST /api/findPropiedades?{parametros_opcionales}`
 * Descripción:
   * Se utiliza para obtener el listado de las propiedades registradas en el sistema que cumplan con algun parametro especifico
   junto con su información correspondiente.
 * Ejemplo de solicitud:
-  * `POST /api/findPropiedad
+  * `POST /api/findPropiedad`
 * Campos requeridos:
   ```
     {
