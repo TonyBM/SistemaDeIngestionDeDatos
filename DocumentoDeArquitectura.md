@@ -54,7 +54,7 @@ Contiene todos los datos de las casas en venta registradas en el sistema. Esta t
 ## Documentación de la API
 ### Endpoints
 * [Listar propiedades](#listarPropiedades) : `GET /api/propiedades/{page}`
-* [Listar propiedades con filtro](#listarPropiedades) : `POST /api/propiedades/{page}`
+* [Listar propiedades con filtro](#) : `POST /api/findPropiedad/{page}`
 * [Listar propiedad especifica](#listarEspecifica) : `GET /api/propiedades/{id}`
 * [Crear propiedad](#crearPropiedad) : `POST /api/propiedades/`
 * [Crear propiedades desde csv](#crearCSV) : `POST /api/propiedades/carga_masiva`
